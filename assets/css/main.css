@@ -1,0 +1,111 @@
+@font-face {
+    font-family: "Open Sans";
+    src: url("/assets/fonts/OpenSans-Regular.ttf");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url("/assets/fonts/OpenSans-SemiBold.ttf");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url("/assets/fonts/OpenSans-Light.ttf");
+    font-weight: 300;
+    font-style: normal;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #444;
+    background-color: #FFF;
+}
+
+h1 {
+    font-size: 54px;
+    font-weight: 300;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+p {
+    line-height: 1.8;
+    font-weight: bold;
+}
+
+.content {
+    max-width: 992px;
+    margin: auto;
+    padding: 20px 3%;
+}
+
+.row-3 {
+    display: flex;
+    margin: -15px;
+}
+
+.row-3 > * {
+    display: block;
+    width: 33.33%;
+    padding: 20px;
+}
+
+.row-3 img {
+    display: block;
+    width: 40%;
+    margin: 0px auto 50px auto;
+}
+
+.button-link {
+    display: inline-block;
+    color: inherit;
+    background-color: #FFF;
+    text-decoration: none;
+    margin: 20px;
+    padding: 20px 25px;
+    border-radius: 6px;
+    box-shadow: 0 1px 8px #888;
+    transition: background-color 0.2s;
+}
+
+.button-link:hover {
+    background-color: #F2F2F2;
+}
+
+.divider {
+    width: 99%;
+    height: 0;
+    margin: 50px auto;
+    border-bottom: 1px solid #CCC;
+}
+
+#logo {
+    height: 80px;
+    display: block;
+    margin: 20px auto;
+}
+
+#main-buttons {
+    text-align: center;
+    color: #666;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 30px 0;
+}
+
+#new-list-button {
+    background-color: #34AE91;
+    color: #FFF;
+    border: none;
+}
+
+#new-list-button:hover {
+    background-color: #67C2AD;
+}
