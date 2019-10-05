@@ -1,3 +1,5 @@
+/* ALL */
+
 @font-face {
     font-family: "Open Sans";
     src: url("/assets/fonts/OpenSans-Regular.ttf");
@@ -45,6 +47,32 @@ p {
     padding: 20px 3%;
 }
 
+.button-link {
+    display: inline-block;
+    color: inherit;
+    background-color: #FFF;
+    text-decoration: none;
+    margin: 20px;
+    padding: 20px 30px;
+    border-radius: 100px;
+    box-shadow: 0 1px 8px #888;
+    transition: background-color 0.2s;
+}
+
+.button-link:hover {
+    background-color: #F2F2F2;
+}
+
+.divider {
+    width: 99%;
+    height: 0;
+    margin: 50px auto;
+    border-bottom: 1px solid #CCC;
+}
+
+
+/* FRONT PAGE */
+
 .row-3 {
     display: flex;
     margin: -15px;
@@ -60,29 +88,6 @@ p {
     display: block;
     width: 40%;
     margin: 0px auto 50px auto;
-}
-
-.button-link {
-    display: inline-block;
-    color: inherit;
-    background-color: #FFF;
-    text-decoration: none;
-    margin: 20px;
-    padding: 20px 25px;
-    border-radius: 6px;
-    box-shadow: 0 1px 8px #888;
-    transition: background-color 0.2s;
-}
-
-.button-link:hover {
-    background-color: #F2F2F2;
-}
-
-.divider {
-    width: 99%;
-    height: 0;
-    margin: 50px auto;
-    border-bottom: 1px solid #CCC;
 }
 
 #logo {
@@ -108,4 +113,24 @@ p {
 
 #new-list-button:hover {
     background-color: #67C2AD;
+}
+
+
+/* LIST */
+
+.list {
+    font-size: 18px;
+    max-width: 600px;
+    margin: auto;
+}
+
+.list-item {
+    display: flex;
+    padding: 10px;
+    border-bottom: 1px solid #CCC;
+}
+
+.list-item > .text {
+    flex-grow: 1;
+    padding: 0 10px;
 }
