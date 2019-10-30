@@ -29,12 +29,12 @@ function ajaxSetList(id, name, data) {
     xhttp.send("idlist=" + id + "&name=" + name + "&data=" + data);
 }
 
-function ajaxGetList(id) {
+function ajaxGetList(id, callback) {
     var xhttp = new XMLHttpRequest();
     
     xhttp.onreadystatechange = function() {        
         if (this.readyState == 4 && this.status == 200) {
-            return JSON.parse(this.responseText);
+            callback(JSON.parse(this.responseText));
         }
     };
     
@@ -44,7 +44,9 @@ function ajaxGetList(id) {
 }
 
 function loadList() {
-    
+    ajaxGetList(listId, function(data) {
+        console.log(data);
+    });
 }
 
 function refreshList() {
