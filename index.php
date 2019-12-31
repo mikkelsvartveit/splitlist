@@ -27,7 +27,7 @@ if(isset($_GET["i"])) {
         <div id="main-buttons">
             <a href="/new" class="button-link" id="new-list-button">Create a new list</a>
             <span>or</span>
-            <a href="/open" class="button-link" id="open-list-button">Open existing list</a>
+            <a href="#" class="button-link" id="open-list-button">Open existing list</a>
         </div>
         
         <div class="divider"></div>
@@ -49,5 +49,7 @@ if(isset($_GET["i"])) {
             </div>
         </div> 
     </div>
+    
+    <script src="/assets/js/main.js"></script>
 </body>
 </html>

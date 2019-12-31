@@ -38,7 +38,7 @@ h1 {
 
 p {
     line-height: 1.8;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .content {
@@ -70,11 +70,18 @@ p {
     border-bottom: 1px solid #CCC;
 }
 
+@media only screen and (max-width: 600px) {
+    h1 {
+        font-size: 42px;
+    }
+}
+
 
 /* FRONT PAGE */
 
 .row-3 {
     display: flex;
+    flex-wrap: wrap;
     margin: -15px;
 }
 
@@ -82,6 +89,7 @@ p {
     display: block;
     width: 33.33%;
     padding: 20px;
+    box-sizing: border-box;
 }
 
 .row-3 img {
@@ -97,9 +105,11 @@ p {
 }
 
 #main-buttons {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: #666;
-    font-weight: bold;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin: 30px 0;
@@ -115,8 +125,28 @@ p {
     background-color: #67C2AD;
 }
 
+@media only screen and (max-width: 768px) {
+    .row-3 {
+        flex-direction: column;
+    }
+    
+    .row-3 > * {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    
+    .row-3 img {
+        width: 128px;
+        margin-bottom: 30px;
+    }
+    
+    #main-buttons {
+        flex-direction: column;
+    }
+}
 
-/* LIST */
+
+/* LIST PAGE */
 
 .list {
     font-size: 18px;
@@ -128,6 +158,10 @@ p {
     display: flex;
     padding: 10px;
     border-bottom: 1px solid #CCC;
+}
+
+.list-item.hidden {
+    display: none;
 }
 
 .list-item > .text {

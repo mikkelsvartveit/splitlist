@@ -12,7 +12,7 @@ $conn->set_charset('utf8');
 $idlist = $_POST["idlist"];
 
 $sql = "SELECT * FROM list WHERE idlist = '$idlist'";
-$result = mysqli_fetch_array($conn->query($sql));
+$result = mysqli_fetch_assoc($conn->query($sql));
 
 if($conn->error) {
     echo("Error: $conn->errno - $conn->error");
