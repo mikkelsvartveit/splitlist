@@ -70,9 +70,19 @@ p {
     border-bottom: 1px solid #CCC;
 }
 
+#logo {
+    height: 80px;
+    display: block;
+    margin: 20px auto;
+}
+
 @media only screen and (max-width: 600px) {
     h1 {
         font-size: 42px;
+    }
+    
+    #logo {
+        height: 60px;
     }
 }
 
@@ -96,12 +106,6 @@ p {
     display: block;
     width: 40%;
     margin: 0px auto 50px auto;
-}
-
-#logo {
-    height: 80px;
-    display: block;
-    margin: 20px auto;
 }
 
 #main-buttons {
