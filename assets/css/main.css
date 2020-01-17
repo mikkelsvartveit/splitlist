@@ -34,11 +34,42 @@ h1 {
     font-weight: 300;
     text-align: center;
     letter-spacing: 1px;
+    margin-bottom: 20px;
 }
 
 p {
     line-height: 1.8;
     font-weight: 600;
+}
+
+.button {
+    display: block;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 100px;
+    box-shadow: 0 1px 8px #888;
+    color: #666;
+    background-color: #FFF;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.2s;
+}
+
+.button:hover {
+    background-color: #F2F2F2;
+}
+
+.button-teal {
+    background-color: #34AE91;
+    color: #FFF;
+    border: none;
+}
+
+.button-teal:hover {
+    background-color: #67C2AD;
 }
 
 .content {
@@ -68,6 +99,12 @@ p {
     height: 0;
     margin: 50px auto;
     border-bottom: 1px solid #CCC;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 
 #logo {
@@ -152,16 +189,24 @@ p {
 
 /* LIST PAGE */
 
+button {
+    
+}
+
 .list {
     font-size: 18px;
     max-width: 600px;
-    margin: auto;
+    margin: 40px auto 20px auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .list-item {
     display: flex;
+    align-items: center;
     padding: 10px;
     border-bottom: 1px solid #CCC;
+    transition: background-color 0.2s;
 }
 
 .list-item.hidden {
@@ -170,5 +215,25 @@ p {
 
 .list-item > .text {
     flex-grow: 1;
-    padding: 0 10px;
+    padding: 3px 10px 4px 10px;
+    font-family: inherit;
+    font-size: inherit;
+    border: none;
+    background-color: transparent;
+}
+
+.list-item .icon-button {
+    background-color: transparent;
+    border: none;
+    margin: 0 0 0 5px;
+    padding: 0;
+}
+
+.list-item .icon-button img, .list-item .drag-handle {
+    vertical-align: bottom;
+}
+
+.sortable-ghost {
+    background-color: #E6F5F1;
+    order: none;
 }

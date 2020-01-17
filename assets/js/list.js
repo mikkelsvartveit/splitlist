@@ -43,7 +43,7 @@ function ajaxGetList(id, callback) {
     xhttp.send("idlist=" + id);
 }
 
-function addItemToList(id, text) {
+function addItemToList(id, text, index) {
     var listArray = JSON.parse(list.data);
     var listEl = document.getElementById("list");
     
@@ -51,6 +51,7 @@ function addItemToList(id, text) {
     listItemEl.removeAttribute("id");
     listItemEl.classList.remove("hidden");
     listItemEl.setAttribute("data-list-id", id);
+    listItemEl.setAttribute("data-list-index", index);
 
     var listItemTextEl = listItemEl.querySelector(".text");
     listItemTextEl.setAttribute("value", text);
@@ -60,6 +61,7 @@ function addItemToList(id, text) {
     listItemDeleteButtonEl.addEventListener("click", deleteListItem);
 
     listEl.appendChild(listItemEl);
+    return listItemEl;
 }
 
 function loadList() {
@@ -72,8 +74,12 @@ function loadList() {
             listNameEl.innerHTML = list.name;
 
             var listArray = JSON.parse(list.data);
+            listArray.sort(function(a, b) {
+                return a.index - b.index;
+            });
+                        
             for(var i = 0; i < listArray.length; i++) {
-                addItemToList(listArray[i].id, listArray[i].text);
+                addItemToList(listArray[i].id, listArray[i].text, listArray[i].index);
             }
             
             console.log("List loaded!");
@@ -86,58 +92,89 @@ function reloadList() {
         // Checks if list has changed
         if(!(list.name == responseText.name && list.data == responseText.data)) {
             list = responseText;
-            var listArray = JSON.parse(list.data);
+            console.log("List has been modified, applying changes...");
+        }
+        
+        var listArray = JSON.parse(list.data);
+        var listNameEl = document.getElementById("list-name");
+        var listEl = document.getElementById("list");
 
-            var listNameEl = document.getElementById("list-name");
-            var listEl = document.getElementById("list");
-
+        if(listNameEl.innerHTML != list.name) {
             listNameEl.innerHTML = list.name;
-                        
-            // Deletes items that has been removed from database
-            var elementsToDelete = [];
-            for(var i = 0; i < listEl.children.length; i++) {
-                var isDeletedElement = true;
-                
-                for(var j = 0; j < listArray.length; j++) {          
-                    if(listEl.children[i].getAttribute("data-list-id") == listArray[j].id) {
-                        isDeletedElement = false;
-                        break;
-                    }
-                }
-                
-                if(isDeletedElement) {
-                    elementsToDelete.push(listEl.children[i]);
-                }
-            }
-            for(var i = 0; i < elementsToDelete.length; i++) {
-                console.log("Deleted element found! Removing it from list...");
-                elementsToDelete[i].parentNode.removeChild(elementsToDelete[i]);
-            }
-            
-            // Refreshes current items and adds potenital new ones
-            for(var i = 0; i < listArray.length; i++) {
-                var isNewElement = true;
-                
-                for(var j = 0; j < listEl.children.length; j++) {          
-                    if(listEl.children[j].getAttribute("data-list-id") == listArray[i].id) {
-                        var listItemTextEl = listEl.children[j].querySelector(".text");
-                        
-                        if(document.activeElement != listItemTextEl) {
-                            listItemTextEl.value = listArray[i].text;
-                        }
-                        
-                        isNewElement = false;
-                        break;
-                    }
-                }
-                
-                if(isNewElement) {
-                    console.log("New element found! Adding it to list...");
-                    addItemToList(listArray[i].id, listArray[i].text);
+        }
+
+        // Deletes items that has been removed from database
+        var elementsToDelete = [];
+        for(var i = 0; i < listEl.children.length; i++) {
+            var isDeletedElement = true;
+
+            for(var j = 0; j < listArray.length; j++) {          
+                if(listEl.children[i].getAttribute("data-list-id") == listArray[j].id) {
+                    isDeletedElement = false;
+                    break;
                 }
             }
 
-            console.log("List reloaded!");
+            if(isDeletedElement) {
+                elementsToDelete.push(listEl.children[i]);
+            }
+        }
+        for(var i = 0; i < elementsToDelete.length; i++) {
+            console.log("Deleted element found, removing it from list...");
+            elementsToDelete[i].parentNode.removeChild(elementsToDelete[i]);
+        }
+
+        // Refreshes current items and adds potenital new ones
+        for(var i = 0; i < listArray.length; i++) {
+            var isNewElement = true;
+
+            for(var j = 0; j < listEl.children.length; j++) {          
+                if(listEl.children[j].getAttribute("data-list-id") == listArray[i].id) {
+                    var listItemTextEl = listEl.children[j].querySelector(".text");
+
+                    if(document.activeElement != listItemTextEl) {
+                        listItemTextEl.value = listArray[i].text;
+                    }
+
+                    listEl.children[j].setAttribute("data-list-index", listArray[i].index);
+                    
+                    isNewElement = false;
+                    break;
+                }
+            }
+
+            if(isNewElement) {
+                console.log("New element found, adding it to list...");
+                addItemToList(listArray[i].id, listArray[i].text);
+            }
+        }
+        
+        // Reorders list if order has changed
+        if(!document.activeElement.classList.contains("text") && !isDragging) {
+            var itemsArray = Array.from(listEl.children);
+            var sortedItemsArray = Array.from(listEl.children).sort(function(a, b) {
+                return a.getAttribute("data-list-index") - b.getAttribute("data-list-index");
+            });
+
+            function areEqual(arr1, arr2) {
+                if(arr1.length !== arr2.length) {
+                    return false;
+                }
+
+                for(var i = 0; i < arr1.length; i++) {
+                    if(arr1[i] !== arr2[i]) {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            if(!areEqual(itemsArray, sortedItemsArray)) {
+                for(var i = 0; i < sortedItemsArray.length; i++) {
+                    listEl.appendChild(sortedItemsArray[i]);
+                }
+            }
         }
     });
 }
@@ -159,9 +196,10 @@ function newListItem() {
     var newElement = new Object;
     newElement.id = newId;
     newElement.text = "";
-    newElement.index = listArray.length + 1;
+    newElement.index = listArray.length;
     
-    addItemToList(newElement.id, newElement.text);
+    var addedElement = addItemToList(newElement.id, newElement.text);
+    addedElement.querySelector(".text").focus();
     
     listArray.push(newElement);
     list.data = JSON.stringify(listArray);
@@ -200,6 +238,25 @@ function updateListItem() {
     }
 }
 
+function updateListOrder() {
+    isDragging = false;
+    var listEl = document.getElementById("list");
+    var listArray = JSON.parse(list.data);
+    
+    for(var i = 0; i < listEl.children.length; i++) {
+        listEl.children[i].setAttribute("data-list-index", i);
+        
+        for(var j = 0; j < listArray.length; j++) {
+            if(listArray[j].id == listEl.children[i].getAttribute("data-list-id")) {
+                listArray[j].index = i;
+            }
+        }
+    }
+    
+    list.data = JSON.stringify(listArray);
+    updateList();
+}
+
 function editListName() {
     var name = prompt("Enter your new list name:", list.name);
     
@@ -211,6 +268,23 @@ function editListName() {
         updateList();
     }
 }
+
+// Initializing SortableJS
+var isDragging = false;
+var listEl = document.getElementById("list");
+var sortable = Sortable.create(listEl, {
+    delay: 0,
+    delayOnTouchOnly: true,
+    touchStartThreshold: 4,
+    animation: 150,
+    handle: ".drag-handle",
+    ghostClass: "sortable-ghost",
+    
+    onStart: function() {
+        isDragging = true;
+    },
+    onEnd: updateListOrder
+});
 
 var listId = getQueryVariable("id");
 var list = {};
