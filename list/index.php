@@ -38,9 +38,7 @@
     </div>
     
     <div id="sample-list-item" class="list-item hidden">
-        <button class="icon-button drag-button" tabindex="-1">
-            <img src="/assets/icons/drag-handle.svg" alt="Handle" class="drag-handle">
-        </button>
+        <img src="/assets/icons/drag-handle.svg" alt="Handle" class="drag-handle">
         
         <!-- <button class="icon-button check-button" tabindex="-1">
             <img src="/assets/icons/checkbox-unchecked.svg" alt="Check">

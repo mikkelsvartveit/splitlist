@@ -26,7 +26,7 @@ if(isset($_GET["i"])) {
     <meta name="msapplication-config" content="/assets/favicons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
      
-    <title>Splitl.ist - The easy way to share lists for everything.</title>
+    <title>Splitl.ist - The quick way to share lists for anything.</title>
 </head>
 
 <body>
@@ -35,7 +35,7 @@ if(isset($_GET["i"])) {
         
         <div class="divider"></div>
         
-        <h1>The quick way to share lists - for everything.</h1>
+        <h1>The quick way to share lists for anything.</h1>
         
         <div id="main-buttons">
             <a href="/new" class="button-link" id="new-list-button">Create a new list</a>
