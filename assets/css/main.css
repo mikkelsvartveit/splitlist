@@ -43,8 +43,10 @@ p {
 }
 
 .button {
-    display: block;
-    padding: 15px 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 18px;
     border: none;
     border-radius: 100px;
     box-shadow: 0 1px 8px #888;
@@ -55,7 +57,13 @@ p {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
+    outline: none;
     transition: background-color 0.2s;
+}
+
+.button img {
+    height: 18px;
+    margin: 0 8px 0 -2px;
 }
 
 .button:hover {
@@ -94,6 +102,27 @@ p {
     background-color: #F2F2F2;
 }
 
+.icon-button {
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.icon-button img {
+    vertical-align: bottom;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-group > * {
+    margin: 10px;
+}
+
 .divider {
     width: 99%;
     height: 0;
@@ -101,16 +130,56 @@ p {
     border-bottom: 1px solid #CCC;
 }
 
+.divider-small {
+    max-width: 594px;
+    height: 0;
+    margin: 30px auto;
+    border-bottom: 1px solid #CCC;
+}
+
 .center {
     margin-left: auto;
     margin-right: auto;
-    text-align: center;
+}
+
+.snackbar {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    bottom: 30px;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition-duration: 0.5s;
+}
+
+.snackbar p {
+    font-size: 14px;
+    font-weight: 600;
+    color: #EEE;
+    margin: 0 25px;
+    padding: 15px 25px;
+    background-color: #444;
+    border-radius: 3px;
+    box-shadow: 0 1px 8px #333;
+}
+
+.snackbar-show {
+    opacity: 1;
+    visibility: visible;
 }
 
 #logo {
     height: 80px;
     display: block;
     margin: 20px auto;
+}
+
+#logo-small {
+    height: 50px;
+    display: block;
+    margin: 10px auto;
 }
 
 @media only screen and (max-width: 600px) {
@@ -196,7 +265,7 @@ button {
 .list {
     font-size: 18px;
     max-width: 600px;
-    margin: 40px auto 20px auto;
+    margin: 30px auto 20px auto;
     display: flex;
     flex-direction: column;
 }
@@ -223,17 +292,22 @@ button {
 }
 
 .list-item .icon-button {
-    background-color: transparent;
-    border: none;
     margin: 0 0 0 5px;
-    padding: 0;
 }
 
-.list-item .icon-button img, .list-item .drag-handle {
+.list-item .drag-handle {
     vertical-align: bottom;
+    cursor: grab;
 }
 
 .sortable-ghost {
     background-color: #E6F5F1;
     order: none;
+}
+
+#clipboard-placeholder {
+    position: fixed;
+    z-index: -1;
+    opacity: 0;
+    display: none;
 }

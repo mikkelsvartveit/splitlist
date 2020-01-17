@@ -43,6 +43,21 @@ function ajaxGetList(id, callback) {
     xhttp.send("idlist=" + id);
 }
 
+var wait;
+function showSnackbar(id) {
+    
+    var el = document.getElementById(id);
+    el.classList.add("snackbar-show");
+    
+    if(wait) {
+        clearInterval(wait);
+    }
+    
+    wait = setTimeout(function() {
+        el.classList.remove("snackbar-show");
+    }, 5000);
+}
+
 function addItemToList(id, text, index) {
     var listArray = JSON.parse(list.data);
     var listEl = document.getElementById("list");
@@ -269,6 +284,19 @@ function editListName() {
     }
 }
 
+function shareList() {
+    var clipboardEl = document.getElementById("clipboard-placeholder");
+    var url = window.location.hostname + "/?i=" + listId;
+    
+    clipboardEl.innerHTML = url;
+    clipboardEl.style.display = "block";
+    clipboardEl.select();
+    document.execCommand("copy");
+    //clipboardEl.style.display = "none";
+    
+    showSnackbar("link-copied-snackbar");
+}
+
 // Initializing SortableJS
 var isDragging = false;
 var listEl = document.getElementById("list");
@@ -290,3 +318,10 @@ var listId = getQueryVariable("id");
 var list = {};
 loadList();
 window.setInterval(reloadList, 1000);
+
+
+// EVENT LISTENERS:
+
+document.getElementById("edit-name-button").addEventListener("click", editListName);
+
+document.getElementById("share-list-button").addEventListener("click", shareList);

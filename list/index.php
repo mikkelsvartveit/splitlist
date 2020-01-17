@@ -23,12 +23,22 @@
 </head>
 <body>
     <div class="content">
-        <!-- <a href="/"><img id="logo" src="/assets/img/logo.png" alt="Logo"></a>
-        
-        <div class="divider"></div> -->
+        <a href="/"><img id="logo-small" src="/assets/img/logo.png" alt="Logo"></a>
+        <div class="divider-small"></div>
         
         <h1 id="list-name"></h1>
-        <button class="button button-teal center" onclick="editListName();">Edit list name</button>
+        
+        <div class="button-group">
+            <button class="button" id="edit-name-button">
+                <img src="/assets/icons/edit.svg" alt="">
+                <span>Edit name</span>
+            </button>
+            
+            <button class="button button-teal" id="share-list-button">
+                <img src="/assets/icons/share-light.svg" alt="">
+                <span>Share</span>
+            </button>
+        </div>
         
         <div class="list" id="list">
             
@@ -50,6 +60,13 @@
             <img src="/assets/icons/remove.svg" alt="Remove">
         </button>
     </div>
+    
+    <div class="snackbar" id="link-copied-snackbar">
+        <p>Link was copied to clipboard. Go share it!</p>
+    </div>
+    
+    <!-- Hidden HTML element used by script for copying text to clipboard -->
+    <textarea id="clipboard-placeholder" readonly></textarea>
     
     <script src="/assets/js/sortable.js"></script>
     <script src="/assets/js/list.js"></script>
