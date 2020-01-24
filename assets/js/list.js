@@ -3,24 +3,24 @@ function getQueryVariable(variable) {
     var query = window.location.search.substring(1);
     var vars = query.split("&");
     
-    for (var i = 0; i < vars.length; i++) {
+    for(var i = 0; i < vars.length; i++) {
         var pair = vars[i].split("=");
         if (pair[0] == variable) {
             return pair[1];
         }
     }
     
-    return "0000";
+    return "0";
 }
 
 function ajaxSetList(id, name, data) {
+    pendingAjaxSetRequests++;
+    
     var xhttp = new XMLHttpRequest();
     
     xhttp.onreadystatechange = function() {        
-        if (this.readyState == 4 && this.status == 200) {
-            if(this.responseText) {
-                console.log(this.responseText);
-            }
+        if(this.readyState == 4 && this.status == 200) {
+            pendingAjaxSetRequests--;
         }
     };
     
@@ -29,18 +29,20 @@ function ajaxSetList(id, name, data) {
     xhttp.send("idlist=" + id + "&name=" + name + "&data=" + data);
 }
 
-function ajaxGetList(id, callback) {
+function ajaxGetList(id, lastedited, callback) {
+    pendingAjaxGetRequest = true;
+    
     var xhttp = new XMLHttpRequest();
     
     xhttp.onreadystatechange = function() {        
-        if (this.readyState == 4 && this.status == 200) {
-            callback(JSON.parse(this.responseText));
+        if(this.readyState == 4 && this.status == 200) {
+            callback(this.responseText);
         }
     };
     
     xhttp.open("POST", "/assets/ajax/getlist.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("idlist=" + id);
+    xhttp.send("idlist=" + id + "&lastedited=" + lastedited);
 }
 
 var wait;
@@ -76,122 +78,145 @@ function addItemToList(id, text, index) {
     listItemDeleteButtonEl.addEventListener("click", deleteListItem);
 
     listEl.appendChild(listItemEl);
+    
+    var itemCountEl = document.getElementById("item-count-number");
+    itemCountEl.innerHTML = listEl.children.length;
+    
     return listItemEl;
 }
 
 function loadList() {
-    ajaxGetList(listId, function(responseText) {
-        // Checks if list has changed
-        if(!(list.name == responseText.name && list.data == responseText.data)) {
-            list = responseText;
-            
-            var listNameEl = document.getElementById("list-name");
-            listNameEl.innerHTML = list.name;
+    ajaxGetList(listId, list.lastedited, function(responseText) {
+        pendingAjaxGetRequest = false;
+        
+        var responseObject = JSON.parse(responseText);
+        list = responseObject;
 
-            var listArray = JSON.parse(list.data);
-            listArray.sort(function(a, b) {
-                return a.index - b.index;
-            });
-                        
-            for(var i = 0; i < listArray.length; i++) {
-                addItemToList(listArray[i].id, listArray[i].text, listArray[i].index);
-            }
-            
-            console.log("List loaded!");
+        document.title = list.name + " - Splitl.ist";
+        
+        var listNameEl = document.getElementById("list-name");
+        listNameEl.innerHTML = list.name;
+
+        var listArray = JSON.parse(list.data);
+        listArray.sort(function(a, b) {
+            return a.index - b.index;
+        });
+
+        for(var i = 0; i < listArray.length; i++) {
+            addItemToList(listArray[i].id, listArray[i].text, listArray[i].index);
         }
+
+        console.log("List loaded!");
     });
 }
 
 function reloadList() {
-    ajaxGetList(listId, function(responseText) {
-        // Checks if list has changed
-        if(!(list.name == responseText.name && list.data == responseText.data)) {
-            list = responseText;
-            console.log("List has been modified, applying changes...");
-        }
-        
-        var listArray = JSON.parse(list.data);
-        var listNameEl = document.getElementById("list-name");
-        var listEl = document.getElementById("list");
+    // Checks that no AJAX requests are currently pending
+    if(!pendingAjaxGetRequest && pendingAjaxSetRequests == 0) {
+        ajaxGetList(listId, list.lastedited, function(responseText) {
+            pendingAjaxGetRequest = false;
 
-        if(listNameEl.innerHTML != list.name) {
-            listNameEl.innerHTML = list.name;
-        }
+            if(responseText) {
+                console.log("AJAX response received, processing changes...");
 
-        // Deletes items that has been removed from database
-        var elementsToDelete = [];
-        for(var i = 0; i < listEl.children.length; i++) {
-            var isDeletedElement = true;
-
-            for(var j = 0; j < listArray.length; j++) {          
-                if(listEl.children[i].getAttribute("data-list-id") == listArray[j].id) {
-                    isDeletedElement = false;
-                    break;
-                }
+                // Checks if list has changed
+                var responseObject = JSON.parse(responseText);
+                list = responseObject;
+            }
+            
+            var listArray = JSON.parse(list.data);
+            var listNameEl = document.getElementById("list-name");
+            var itemCountEl = document.getElementById("item-count-number");
+            var listEl = document.getElementById("list");
+            
+            if(document.title != list.name + " - Splitl.ist") {
+                document.title = list.name + " - Splitl.ist";
             }
 
-            if(isDeletedElement) {
-                elementsToDelete.push(listEl.children[i]);
+            if(listNameEl.innerHTML != list.name) {
+                listNameEl.innerHTML = list.name;
             }
-        }
-        for(var i = 0; i < elementsToDelete.length; i++) {
-            console.log("Deleted element found, removing it from list...");
-            elementsToDelete[i].parentNode.removeChild(elementsToDelete[i]);
-        }
 
-        // Refreshes current items and adds potenital new ones
-        for(var i = 0; i < listArray.length; i++) {
-            var isNewElement = true;
+            // Deletes items that has been removed from database
+            var elementsToDelete = [];
+            for(var i = 0; i < listEl.children.length; i++) {
+                var isDeletedElement = true;
 
-            for(var j = 0; j < listEl.children.length; j++) {          
-                if(listEl.children[j].getAttribute("data-list-id") == listArray[i].id) {
-                    var listItemTextEl = listEl.children[j].querySelector(".text");
-
-                    if(document.activeElement != listItemTextEl) {
-                        listItemTextEl.value = listArray[i].text;
+                for(var j = 0; j < listArray.length; j++) {          
+                    if(listEl.children[i].getAttribute("data-list-id") == listArray[j].id) {
+                        isDeletedElement = false;
+                        break;
                     }
+                }
 
-                    listEl.children[j].setAttribute("data-list-index", listArray[i].index);
-                    
-                    isNewElement = false;
-                    break;
+                if(isDeletedElement) {
+                    elementsToDelete.push(listEl.children[i]);
+                }
+            }
+            for(var i = 0; i < elementsToDelete.length; i++) {
+                console.log("Deleted element found, removing it from list...");
+                elementsToDelete[i].parentNode.removeChild(elementsToDelete[i]);
+            }
+
+            // Refreshes current items and adds potenital new ones
+            for(var i = 0; i < listArray.length; i++) {
+                var isNewElement = true;
+
+                for(var j = 0; j < listEl.children.length; j++) {          
+                    if(listEl.children[j].getAttribute("data-list-id") == listArray[i].id) {
+                        var listItemTextEl = listEl.children[j].querySelector(".text");
+
+                        if(document.activeElement != listItemTextEl) {
+                            listItemTextEl.value = listArray[i].text;
+                        }
+
+                        listEl.children[j].setAttribute("data-list-index", listArray[i].index);
+
+                        isNewElement = false;
+                        break;
+                    }
+                }
+
+                if(isNewElement) {
+                    console.log("New element found, adding it to list...");
+                    addItemToList(listArray[i].id, listArray[i].text);
                 }
             }
 
-            if(isNewElement) {
-                console.log("New element found, adding it to list...");
-                addItemToList(listArray[i].id, listArray[i].text);
-            }
-        }
-        
-        // Reorders list if order has changed
-        if(!document.activeElement.classList.contains("text") && !isDragging) {
-            var itemsArray = Array.from(listEl.children);
-            var sortedItemsArray = Array.from(listEl.children).sort(function(a, b) {
-                return a.getAttribute("data-list-index") - b.getAttribute("data-list-index");
-            });
+            // Reorders list if order has changed
+            if(!document.activeElement.classList.contains("text") && !isDragging) {
+                var itemsArray = Array.from(listEl.children);
+                var sortedItemsArray = Array.from(listEl.children).sort(function(a, b) {
+                    return a.getAttribute("data-list-index") - b.getAttribute("data-list-index");
+                });
 
-            function areEqual(arr1, arr2) {
-                if(arr1.length !== arr2.length) {
-                    return false;
-                }
-
-                for(var i = 0; i < arr1.length; i++) {
-                    if(arr1[i] !== arr2[i]) {
+                function areEqual(arr1, arr2) {
+                    if(arr1.length !== arr2.length) {
                         return false;
                     }
+
+                    for(var i = 0; i < arr1.length; i++) {
+                        if(arr1[i] !== arr2[i]) {
+                            return false;
+                        }
+                    }
+
+                    return true;
                 }
 
-                return true;
-            }
-
-            if(!areEqual(itemsArray, sortedItemsArray)) {
-                for(var i = 0; i < sortedItemsArray.length; i++) {
-                    listEl.appendChild(sortedItemsArray[i]);
+                if(!areEqual(itemsArray, sortedItemsArray)) {
+                    for(var i = 0; i < sortedItemsArray.length; i++) {
+                        listEl.appendChild(sortedItemsArray[i]);
+                    }
                 }
             }
-        }
-    });
+            
+            // Updates item counter
+            if(itemCountEl.innerHTML != listEl.children.length) {
+                itemCountEl.innerHTML = listEl.children.length;
+            }
+        });
+    }
 }
 
 function updateList() {
@@ -208,7 +233,7 @@ function newListItem() {
         }
     }
         
-    var newElement = new Object;
+    var newElement = {};
     newElement.id = newId;
     newElement.text = "";
     newElement.index = listArray.length;
@@ -236,6 +261,9 @@ function deleteListItem() {
             break;
         }
     }
+    
+    var itemCountEl = document.getElementById("item-count-number");
+    itemCountEl.innerHTML = listEl.children.length;
 }
 
 function updateListItem() {
@@ -292,7 +320,7 @@ function shareList() {
     clipboardEl.style.display = "block";
     clipboardEl.select();
     document.execCommand("copy");
-    //clipboardEl.style.display = "none";
+    clipboardEl.style.display = "none";
     
     showSnackbar("link-copied-snackbar");
 }
@@ -314,14 +342,21 @@ var sortable = Sortable.create(listEl, {
     onEnd: updateListOrder
 });
 
+// Tracks whether an AJAX get request is waiting for response
+var pendingAjaxGetRequest = false;
+// Tracks how many AJAX set requests are waiting for response
+var pendingAjaxSetRequests = 0;
+
 var listId = getQueryVariable("id");
 var list = {};
+
+// Loads list once on page load
 loadList();
+
+// Checks for changes in database every second
 window.setInterval(reloadList, 1000);
 
-
 // EVENT LISTENERS:
-
 document.getElementById("edit-name-button").addEventListener("click", editListName);
-
 document.getElementById("share-list-button").addEventListener("click", shareList);
+document.getElementById("new-item-button").addEventListener("click", newListItem);

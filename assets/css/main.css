@@ -258,8 +258,8 @@ p {
 
 /* LIST PAGE */
 
-button {
-    
+#list-name {
+    margin-bottom: 10px;
 }
 
 .list {
@@ -291,6 +291,10 @@ button {
     background-color: transparent;
 }
 
+.list-item > .text:focus {
+    outline-color: #34AE91;
+}
+
 .list-item .icon-button {
     margin: 0 0 0 5px;
 }
@@ -303,6 +307,13 @@ button {
 .sortable-ghost {
     background-color: #E6F5F1;
     order: none;
+}
+
+#item-count {
+    font-size: 18px;
+    color: #666;
+    text-align: center;
+    margin: 0 0 20px 0;
 }
 
 #clipboard-placeholder {

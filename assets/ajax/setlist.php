@@ -13,7 +13,7 @@ $idlist = $_POST["idlist"];
 $name = $_POST["name"];
 $data = $_POST["data"];
 
-$sql = "UPDATE list SET name = '$name', lastedited = NOW(), data = '$data' WHERE idlist = '$idlist'";
+$sql = "UPDATE list SET name = '$name', lastedited = NOW(6), data = '$data' WHERE idlist = '$idlist'";
 $conn->query($sql);
 
 if($conn->error) {

@@ -10,6 +10,7 @@ if($conn->connect_error) {
 $conn->set_charset('utf8');
 
 $idlist = $_POST["idlist"];
+$lastedited = $_POST["lastedited"];
 
 $sql = "SELECT * FROM list WHERE idlist = '$idlist'";
 $result = mysqli_fetch_assoc($conn->query($sql));
@@ -17,6 +18,10 @@ $result = mysqli_fetch_assoc($conn->query($sql));
 if($conn->error) {
     echo("Error: $conn->errno - $conn->error");
 } else {
-    echo json_encode($result);
+    if($result["lastedited"] != $lastedited) {
+        echo json_encode($result);
+    } else {
+        echo false;
+    }
 }
 ?>
