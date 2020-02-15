@@ -212,7 +212,7 @@ function reloadList() {
             }
             
             // Updates item counter
-            if(itemCountEl.innerHTML != listEl.children.length) {
+            if(itemCountEl.innerHTML != listEl.children.length && !isDragging) {
                 itemCountEl.innerHTML = listEl.children.length;
             }
         });
