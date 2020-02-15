@@ -9,9 +9,9 @@ if($conn->connect_error) {
 
 $conn->set_charset('utf8');
 
-$idlist = $_POST["idlist"];
-$name = $_POST["name"];
-$data = $_POST["data"];
+$idlist = $conn -> real_escape_string($_POST["idlist"]);
+$name = $conn -> real_escape_string($_POST["name"]);
+$data = $conn -> real_escape_string($_POST["data"]);
 
 $sql = "UPDATE list SET name = '$name', lastedited = NOW(6), data = '$data' WHERE idlist = '$idlist'";
 $conn->query($sql);

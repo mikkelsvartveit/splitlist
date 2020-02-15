@@ -26,7 +26,7 @@ function ajaxSetList(id, name, data) {
     
     xhttp.open("POST", "/assets/ajax/setlist.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("idlist=" + id + "&name=" + name + "&data=" + data);
+    xhttp.send("idlist=" + id + "&name=" + encodeURIComponent(name) + "&data=" + encodeURIComponent(data));
 }
 
 function ajaxGetList(id, lastedited, callback) {
@@ -269,6 +269,8 @@ function deleteListItem() {
 function updateListItem() {
     var itemId = this.parentElement.getAttribute("data-list-id");
     var newText = this.value;
+    
+    //newText = newText.replace(/["'&\\]/g, '');
     
     var listArray = JSON.parse(list.data);
     for(var i = 0; i < listArray.length; i++) {
