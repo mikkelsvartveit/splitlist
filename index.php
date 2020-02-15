@@ -43,6 +43,22 @@ if(isset($_GET["i"])) {
             <span>or</span>
             <a href="#" class="button-link" id="open-list-button">Open existing list</a>
         </div>
+        
+        <div id="recent-lists-section" class="">
+            <h2>Recently opened lists</h2>
+            <div id="recent-lists">
+                <div id="sample-list">
+                    <a href="/list?id=0">
+                        <span class="list-name">Untitled list</span>
+                        <span class="list-last-edited">3 minutes ago</span>
+                    </a>
+                    
+                    <button class="icon-button remove-button" tabindex="-1">
+                        <img src="/assets/icons/remove.svg" alt="Remove">
+                    </button>
+                </div>
+            </div>
+        </div>
 
         <div class="divider"></div>
 

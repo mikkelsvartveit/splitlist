@@ -57,7 +57,7 @@ p {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
-    outline: none;
+    outline-color: #34AE91;
     transition: background-color 0.2s;
 }
 
@@ -140,6 +140,10 @@ p {
 .center {
     margin-left: auto;
     margin-right: auto;
+}
+
+.hidden {
+    display: none;
 }
 
 .snackbar {
@@ -235,6 +239,54 @@ p {
     background-color: #67C2AD;
 }
 
+#recent-lists-section {
+    max-width: 300px;
+    margin: auto;
+}
+
+#recent-lists-section h2 {
+    text-align: center;
+    color: #555;
+    margin-top: 50px;
+}
+
+#recent-lists div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2px;
+    border-radius: 5px;
+    transition-duration: 0.1s;
+}
+
+#recent-lists a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+    color: #555;
+    text-decoration: none;
+    padding: 5px 5px 5px 10px;
+}
+
+#recent-lists div .icon-button img {
+    width: 18px;
+    margin: 0px 5px 0px 0px;
+}
+
+#recent-lists div a .list-name {
+    font-weight: 600;
+    margin-bottom: 1px;
+}
+
+#recent-lists div .list-last-edited {
+    font-size: 12px;
+    color: #888;
+}
+
+#recent-lists div:hover {
+    background-color: #EFEFEF;
+}
+
 @media only screen and (max-width: 768px) {
     .row-3 {
         flex-direction: column;
@@ -278,10 +330,6 @@ p {
     transition: background-color 0.2s;
 }
 
-.list-item.hidden {
-    display: none;
-}
-
 .list-item > .text {
     flex-grow: 1;
     padding: 3px 10px 4px 10px;
@@ -302,6 +350,10 @@ p {
 .list-item .drag-handle {
     vertical-align: bottom;
     cursor: grab;
+}
+
+.list-item.hidden {
+    display: none;
 }
 
 .sortable-ghost {
