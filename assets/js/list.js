@@ -112,7 +112,7 @@ function loadList() {
         var responseObject = JSON.parse(responseText);
         list = responseObject;
 
-        document.title = list.name + " - Splitl.ist";
+        document.title = list.name + " - Splitlist";
         
         var listNameEl = document.getElementById("list-name");
         listNameEl.innerHTML = list.name;
@@ -151,8 +151,8 @@ function reloadList() {
             var itemCountEl = document.getElementById("item-count-number");
             var listEl = document.getElementById("list");
             
-            if(document.title != list.name + " - Splitl.ist") {
-                document.title = list.name + " - Splitl.ist";
+            if(document.title != list.name + " - Splitlist") {
+                document.title = list.name + " - Splitlist";
             }
 
             if(listNameEl.innerHTML != list.name) {

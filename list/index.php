@@ -14,13 +14,13 @@
     <link rel="manifest" href="/assets/favicons/site.webmanifest">
     <link rel="mask-icon" href="/assets/favicons/safari-pinned-tab.svg" color="#34ae91">
     <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
-    <meta name="apple-mobile-web-app-title" content="Splitl.ist">
-    <meta name="application-name" content="Splitl.ist">
+    <meta name="apple-mobile-web-app-title" content="Splitlist">
+    <meta name="application-name" content="Splitlist">
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="msapplication-config" content="/assets/favicons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
 
-    <title>Splitl.ist</title>
+    <title>Splitlist</title>
 </head>
 
 <body>

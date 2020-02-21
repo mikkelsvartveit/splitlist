@@ -21,13 +21,13 @@ if(isset($_GET["i"])) {
     <link rel="manifest" href="/assets/favicons/site.webmanifest">
     <link rel="mask-icon" href="/assets/favicons/safari-pinned-tab.svg" color="#34ae91">
     <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
-    <meta name="apple-mobile-web-app-title" content="Splitl.ist">
-    <meta name="application-name" content="Splitl.ist">
+    <meta name="apple-mobile-web-app-title" content="Splitlist">
+    <meta name="application-name" content="Splitlist">
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="msapplication-config" content="/assets/favicons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
 
-    <title>Splitl.ist - The quick way to share lists for anything.</title>
+    <title>Splitlist - The quick way to share lists for anything.</title>
 </head>
 
 <body>
@@ -56,7 +56,7 @@ if(isset($_GET["i"])) {
         <div class="row-3">
             <div>
                 <img src="/assets/img/create.svg" alt="Create">
-                <p>Getting started with Splitl.ist couldn't be easier. No registration required - simply click the create button above to make a list, and start typing right away. It's that simple!</p>
+                <p>Getting started with Splitlist couldn't be easier. No registration required - simply click the create button above to make a list, and start typing right away. It's that simple!</p>
             </div>
 
             <div>
@@ -66,7 +66,7 @@ if(isset($_GET["i"])) {
 
             <div>
                 <img src="/assets/img/devices.svg" alt="Devices">
-                <p>Does your device have a web browser? Then it works with Splitl.ist. Access and edit your lists on your phone, tablet or computer. The lists will sync on all your devices in real-time.</p>
+                <p>Does your device have a web browser? Then it works with Splitlist. Access and edit your lists on your phone, tablet or computer. The lists will sync on all your devices in real-time.</p>
             </div>
         </div>
     </div>
