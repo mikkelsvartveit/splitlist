@@ -49,7 +49,7 @@ function openList() {
 function loadRecentLists() {
     var recentLists = JSON.parse(localStorage.getItem("recentLists"));
     
-    if(recentLists.length > 0) {
+    if(recentLists && recentLists.length > 0) {
         recentLists.sort((a, b) => Date.parse(b.time) - Date.parse(a.time));
 
         var listEl = document.getElementById("recent-lists");
