@@ -60,6 +60,26 @@ function showSnackbar(id) {
     }, 5000);
 }
 
+// Updates the localstorage entry that stores previously opened lists
+function updateRecentLists() {
+    var recentLists = JSON.parse(localStorage.getItem("recentLists")) || [];
+
+    var index = recentLists.findIndex(list => list.id == listId);
+    if(index >= 0) {
+        recentLists[index].name = list.name;
+        recentLists[index].time = new Date();
+    } else {
+        var listObject = {};
+        listObject.id = listId;
+        listObject.name = list.name;
+        listObject.time = new Date();
+
+        recentLists.push(listObject);
+    }
+
+    localStorage.setItem("recentLists", JSON.stringify(recentLists));
+}
+
 function addItemToList(id, text, index) {
     var listArray = JSON.parse(list.data);
     var listEl = document.getElementById("list");
@@ -105,6 +125,8 @@ function loadList() {
         for(var i = 0; i < listArray.length; i++) {
             addItemToList(listArray[i].id, listArray[i].text, listArray[i].index);
         }
+        
+        updateRecentLists();
 
         console.log("List loaded!");
     });
@@ -215,6 +237,8 @@ function reloadList() {
             if(itemCountEl.innerHTML != listEl.children.length && !isDragging) {
                 itemCountEl.innerHTML = listEl.children.length;
             }
+            
+            updateRecentLists();
         });
     }
 }
