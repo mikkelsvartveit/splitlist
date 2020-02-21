@@ -40,7 +40,7 @@
 
             <button class="button button-teal" id="share-list-button">
                 <img src="/assets/icons/share-light.svg" alt="">
-                <span>Share</span>
+                <span>Copy link</span>
             </button>
         </div>
 
