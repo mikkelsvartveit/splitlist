@@ -1,5 +1,5 @@
-<?php 
-if(isset($_GET["i"])) {
+<?php
+if (isset($_GET["i"])) {
     $id = $_GET["i"];
     header("Location: /list?id=" . $id);
 }
@@ -43,11 +43,11 @@ if(isset($_GET["i"])) {
             <span>or</span>
             <a href="#" class="button-link" id="open-list-button">Open existing list</a>
         </div>
-        
+
         <div id="recent-lists-section" class="hidden">
             <h2>Recently opened lists</h2>
             <div id="recent-lists">
-                
+
             </div>
         </div>
 
@@ -70,7 +70,7 @@ if(isset($_GET["i"])) {
             </div>
         </div>
     </div>
-    
+
     <!-- Hidden sample element for recent lists -->
     <div id="sample-list" class="hidden">
         <a href="/list?id=0">

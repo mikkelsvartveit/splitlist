@@ -50,7 +50,7 @@
 
         <button class="button center" id="new-item-button">New item</button>
     </div>
-    
+
     <div class="snackbar" id="link-copied-snackbar">
         <p>Link was copied to clipboard. Go share it!</p>
     </div>

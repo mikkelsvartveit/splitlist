@@ -4,14 +4,15 @@ $db_config = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . "/../private/db_config.i
 $conn = new mysqli($db_config["servername"], $db_config["username"], $db_config["password"], $db_config["dbname"]);
 
 // Function for generating a random ID
-function generateId() {
+function generateId()
+{
     $characters = "abcdefghijklmnopqrstuvwxyz0123456789";
     $id = "";
-    
-    for($i = 0; $i < 4; $i++) {
+
+    for ($i = 0; $i < 4; $i++) {
         $id .= $characters[mt_rand(0, strlen($characters) - 1)];
     }
-    
+
     return $id;
 }
 
@@ -19,7 +20,7 @@ function generateId() {
 do {
     $id = generateId();
     $result = $conn->query("SELECT idlist FROM list WHERE idlist = '$id'");
-} while($result->num_rows > 0);
+} while ($result->num_rows > 0);
 
 $name = "Unnamed list";
 $data = '[{"id":0,"text":"Item 1","index":1}]';
@@ -27,11 +28,10 @@ $data = '[{"id":0,"text":"Item 1","index":1}]';
 $sql = "INSERT INTO list (idlist, name, lastedited, data) VALUES('$id', '$name', NOW(), '$data')";
 $conn->query($sql);
 
-if($conn->error) {
-    echo("Error: $conn->errno - $conn->error");
+if ($conn->error) {
+    echo ("Error: $conn->errno - $conn->error");
 } else {
     // Redirects to the newly created list
     $url = "/list/?id=$id";
     echo "<script>window.location = '$url'</script>";
 }
-?>
