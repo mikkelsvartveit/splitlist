@@ -37,6 +37,10 @@ h1 {
     margin-bottom: 20px;
 }
 
+h2 {
+    font-weight: 600;
+}
+
 p {
     line-height: 1.8;
     font-weight: 600;
