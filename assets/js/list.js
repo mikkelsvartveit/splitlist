@@ -117,6 +117,9 @@ function loadList() {
         var listNameEl = document.getElementById("list-name");
         listNameEl.innerHTML = list.name;
 
+        var listIdEl = document.getElementById("list-id-id");
+        listIdEl.innerHTML = listId.toUpperCase();
+
         var listArray = JSON.parse(list.data);
         listArray.sort(function (a, b) {
             return a.index - b.index;

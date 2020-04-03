@@ -3,6 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="Create, share and collaborate on to-do lists, shopping lists and more. No registration required!">
+    <meta name="keywords" content="list,share,collaborate,easy,easily,quick,quickly">
+    <meta name="robots" content="noindex">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
     <link rel="stylesheet" href="/assets/css/main.css">
@@ -45,6 +48,7 @@
 
         <h1 id="list-name"></h1>
 
+        <p id="list-id">List ID: <b id="list-id-id"></b></p>
         <p id="item-count"><span id="item-count-number">0</span> items</p>
 
         <div class="button-group">

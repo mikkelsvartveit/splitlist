@@ -10,6 +10,8 @@ if (isset($_GET["i"])) {
 
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="Create, share and collaborate on to-do lists, shopping lists and more. No registration required!">
+    <meta name="keywords" content="list,share,collaborate,easy,easily,quick,quickly">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
     <link rel="stylesheet" href="/assets/css/main.css">

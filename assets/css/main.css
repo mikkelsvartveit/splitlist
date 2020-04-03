@@ -27,7 +27,6 @@ body {
     line-height: 1.4;
     color: #444;
     background-color: #FFF;
-    margin: 0;
 }
 
 h1 {
@@ -91,7 +90,7 @@ nav .button img {
 }
 
 @media only screen and (max-width: 600px) {
-    #nav-open-list {
+    #nav-open-list-button {
         display: none;
     }
 }
@@ -136,7 +135,7 @@ nav .button img {
 
 .content {
     max-width: 992px;
-    margin: 70px auto;
+    margin: 65px auto;
     padding: 10px 3%;
 }
 
@@ -359,7 +358,7 @@ nav .button img {
     flex-grow: 1;
     padding: 3px 10px 4px 10px;
     font-family: inherit;
-    font-size: inherit;
+    font-size: 16px;
     border: none;
     background-color: transparent;
 }
@@ -386,8 +385,17 @@ nav .button img {
     order: none;
 }
 
+#list-id {
+    font-size: 18px;
+    font-weight: 400;
+    color: #666;
+    text-align: center;
+    margin: 0 0 0 0;
+}
+
 #item-count {
     font-size: 18px;
+    font-weight: 400;
     color: #666;
     text-align: center;
     margin: 0 0 20px 0;
