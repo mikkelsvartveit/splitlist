@@ -351,6 +351,17 @@ function shareList() {
     showSnackbar("link-copied-snackbar");
 }
 
+function newList() {
+    window.location.href = "/new";
+}
+
+function openList() {
+    var id = prompt("Input your list ID:");
+    if (id) {
+        window.location = "/list/?id=" + id;
+    }
+}
+
 // Initializing SortableJS
 var isDragging = false;
 var listEl = document.getElementById("list");
@@ -383,6 +394,8 @@ loadList();
 window.setInterval(reloadList, 1000);
 
 // EVENT LISTENERS:
+document.getElementById("nav-open-list-button").addEventListener("click", openList);
+document.getElementById("nav-new-list-button").addEventListener("click", newList);
 document.getElementById("edit-name-button").addEventListener("click", editListName);
 document.getElementById("share-list-button").addEventListener("click", shareList);
 document.getElementById("new-item-button").addEventListener("click", newListItem);

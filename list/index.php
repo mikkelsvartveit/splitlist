@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
     <link rel="stylesheet" href="/assets/css/main.css">
 
@@ -24,9 +24,24 @@
 </head>
 
 <body>
+    <nav>
+        <div class="nav-content">
+            <div class="nav-left">
+                <a href="/">
+                    <img id="nav-logo" src="/assets/img/logo.png" alt="Splitlist">
+                </a>
+            </div>
+
+            <div class="nav-right">
+                <button id="nav-open-list-button" class="button"><img src="/assets/icons/open.svg" alt="Open">Open</button>
+                <button id="nav-new-list-button" class="button button-teal"><img src="/assets/icons/add-light.svg" alt="New">New</button>
+            </div>
+        </div>
+    </nav>
+
     <div class="content">
-        <a href="/"><img id="logo-small" src="/assets/img/logo.png" alt="Logo"></a>
-        <div class="divider-small"></div>
+        <!-- <a href="/"><img id="logo-small" src="/assets/img/logo.png" alt="Logo"></a>
+        <div class="divider-small"></div> -->
 
         <h1 id="list-name"></h1>
 
@@ -48,7 +63,7 @@
 
         </div>
 
-        <button class="button center" id="new-item-button">New item</button>
+        <button class="button center" id="new-item-button"><img src="/assets/icons/add.svg" alt="Add"> New item</button>
     </div>
 
     <div class="snackbar" id="link-copied-snackbar">

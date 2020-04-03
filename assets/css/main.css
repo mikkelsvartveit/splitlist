@@ -27,6 +27,7 @@ body {
     line-height: 1.4;
     color: #444;
     background-color: #FFF;
+    margin: 0;
 }
 
 h1 {
@@ -44,6 +45,55 @@ h2 {
 p {
     line-height: 1.8;
     font-weight: 600;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100%;
+    height: 70px;
+    background-color: #fff;
+    box-shadow: 0 0 8px #888;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.nav-content>div {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    display: flex;
+}
+
+nav img {
+    height: 30px;
+    image-rendering: crisp-edges;
+}
+
+nav .button {
+    margin-left: 15px;
+    padding: 10px 15px;
+}
+
+nav .button img {
+    margin-right: 5px;
+}
+
+@media only screen and (max-width: 600px) {
+    #nav-open-list {
+        display: none;
+    }
 }
 
 .button {
@@ -86,24 +136,8 @@ p {
 
 .content {
     max-width: 992px;
-    margin: auto;
-    padding: 20px 3%;
-}
-
-.button-link {
-    display: inline-block;
-    color: inherit;
-    background-color: #FFF;
-    text-decoration: none;
-    margin: 20px;
-    padding: 20px 30px;
-    border-radius: 100px;
-    box-shadow: 0 1px 8px #888;
-    transition: background-color 0.2s;
-}
-
-.button-link:hover {
-    background-color: #F2F2F2;
+    margin: 70px auto;
+    padding: 10px 3%;
 }
 
 .icon-button {
@@ -178,25 +212,9 @@ p {
     visibility: visible;
 }
 
-#logo {
-    height: 80px;
-    display: block;
-    margin: 20px auto;
-}
-
-#logo-small {
-    height: 50px;
-    display: block;
-    margin: 10px auto;
-}
-
 @media only screen and (max-width: 600px) {
     h1 {
         font-size: 42px;
-    }
-
-    #logo {
-        height: 60px;
     }
 }
 
@@ -233,14 +251,10 @@ p {
     margin: 30px 0;
 }
 
-#new-list-button {
-    background-color: #34AE91;
-    color: #FFF;
-    border: none;
-}
-
-#new-list-button:hover {
-    background-color: #67C2AD;
+#main-buttons button {
+    font-size: inherit;
+    margin: 20px;
+    padding: 20px 30px;
 }
 
 #recent-lists-section {

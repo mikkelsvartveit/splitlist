@@ -10,7 +10,7 @@ if (isset($_GET["i"])) {
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
     <link rel="stylesheet" href="/assets/css/main.css">
 
@@ -31,17 +31,28 @@ if (isset($_GET["i"])) {
 </head>
 
 <body>
+    <nav>
+        <div class="nav-content">
+            <div class="nav-left">
+                <a href="/">
+                    <img id="nav-logo" src="/assets/img/logo.png" alt="Splitlist">
+                </a>
+            </div>
+
+            <div class="nav-right">
+                <button id="nav-open-list-button" class="button"><img src="/assets/icons/open.svg" alt="Open">Open</button>
+                <button id="nav-new-list-button" class="button button-teal"><img src="/assets/icons/add-light.svg" alt="New">New</button>
+            </div>
+        </div>
+    </nav>
+
     <div class="content">
-        <img id="logo" src="/assets/img/logo.png" alt="Logo">
-
-        <div class="divider"></div>
-
         <h1>The quick way to share lists for anything.</h1>
 
         <div id="main-buttons">
-            <a href="/new" class="button-link" id="new-list-button">Create a new list</a>
+            <button class="button button-teal" id="new-list-button">Create a new list</button>
             <span>or</span>
-            <a href="#" class="button-link" id="open-list-button">Open existing list</a>
+            <button class="button" id="open-list-button">Open existing list</button>
         </div>
 
         <div id="recent-lists-section" class="hidden">
