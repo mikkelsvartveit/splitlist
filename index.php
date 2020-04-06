@@ -69,17 +69,34 @@ if (isset($_GET["i"])) {
         <div class="row-3">
             <div>
                 <img src="/assets/img/create.svg" alt="Create">
-                <p>Getting started with Splitlist couldn't be easier. No registration required - simply click the create button above to make a list, and start typing right away. It's that simple!</p>
+                <p class="feature">Getting started with Splitlist couldn't be easier. No registration required - simply click the create button above to make a list, and start typing right away. It's that simple!</p>
             </div>
 
             <div>
                 <img src="/assets/img/share.svg" alt="Share">
-                <p>Share your list with the click of a button. Just toss the link to your friends or family members, and you're ready to start collaborating on grocery lists, to-do lists and more.</p>
+                <p class="feature">Share your list with the click of a button. Just toss the link to your friends or family members, and you're ready to start collaborating on grocery lists, to-do lists and more.</p>
             </div>
 
             <div>
                 <img src="/assets/img/devices.svg" alt="Devices">
-                <p>Does your device have a web browser? Then it works with Splitlist. Access and edit your lists on your phone, tablet or computer. The lists will sync on all your devices in real-time.</p>
+                <p class="feature">Does your device have a web browser? Then it works with Splitlist. Access and edit your lists on your phone, tablet or computer. The lists will sync on all your devices in real-time.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="open-list-modal" class="modal modal-hidden">
+        <div class="modal-content">
+            <h2>Open list</h2>
+            <p>Input ID to open list:</p>
+            <input type="text" id="open-list-modal-input" placeholder="List ID">
+            <div class="modal-buttons">
+                <div>
+                    <button class="button close-modal">Cancel</button>
+                </div>
+
+                <div>
+                    <button id="open-list-modal-open-button" class="button button-teal">Open</button>
+                </div>
             </div>
         </div>
     </div>
@@ -87,8 +104,8 @@ if (isset($_GET["i"])) {
     <!-- Hidden sample element for recent lists -->
     <div id="sample-list" class="hidden">
         <a href="/list?id=0">
-            <span class="list-name">Untitled list</span>
-            <span class="list-last-edited">3 minutes ago</span>
+            <span class="list-name"></span>
+            <span class="list-last-edited"></span>
         </a>
 
         <button class="icon-button remove-button" tabindex="-1">
@@ -96,6 +113,7 @@ if (isset($_GET["i"])) {
         </button>
     </div>
 
+    <script src="/assets/js/all.js"></script>
     <script src="/assets/js/main.js"></script>
 </body>
 

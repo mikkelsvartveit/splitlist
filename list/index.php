@@ -70,6 +70,39 @@
         <button class="button center" id="new-item-button"><img src="/assets/icons/add.svg" alt="Add"> New item</button>
     </div>
 
+    <div id="open-list-modal" class="modal modal-hidden">
+        <div class="modal-content">
+            <h2>Open list</h2>
+            <p>Input ID to open list:</p>
+            <input type="text" id="open-list-modal-input" placeholder="List ID">
+            <div class="modal-buttons">
+                <div>
+                    <button class="button close-modal">Cancel</button>
+                </div>
+
+                <div>
+                    <button id="open-list-modal-open-button" class="button button-teal">Open</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="edit-name-modal" class="modal modal-hidden">
+        <div class="modal-content">
+            <h2>Edit list name</h2>
+            <input type="text" id="edit-name-modal-input" placeholder="New name">
+            <div class="modal-buttons">
+                <div>
+                    <button class="button close-modal">Cancel</button>
+                </div>
+
+                <div>
+                    <button id="edit-name-modal-rename-button" class="button button-teal">Rename</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="snackbar" id="link-copied-snackbar">
         <p>Link was copied to clipboard. Go share it!</p>
     </div>
@@ -93,6 +126,7 @@
     <textarea id="clipboard-placeholder" readonly></textarea>
 
     <script src="/assets/js/sortable.js"></script>
+    <script src="/assets/js/all.js"></script>
     <script src="/assets/js/list.js"></script>
 </body>
 

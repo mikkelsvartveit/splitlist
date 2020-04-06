@@ -39,17 +39,6 @@ function removeRecentList() {
     loadRecentLists();
 }
 
-function newList() {
-    window.location.href = "/new";
-}
-
-function openList() {
-    var id = prompt("Input your list ID:");
-    if (id) {
-        window.location = "/list/?id=" + id;
-    }
-}
-
 function loadRecentLists() {
     var recentLists = JSON.parse(localStorage.getItem("recentLists"));
 
@@ -86,8 +75,11 @@ function loadRecentLists() {
 
 loadRecentLists();
 
+
 // EVENT LISTENERS:
-document.getElementById("nav-open-list-button").addEventListener("click", openList);
-document.getElementById("nav-new-list-button").addEventListener("click", newList);
-document.getElementById("open-list-button").addEventListener("click", openList);
+
 document.getElementById("new-list-button").addEventListener("click", newList);
+
+document.getElementById("open-list-button").addEventListener("click", function () {
+    showModal("open-list-modal", true);
+});

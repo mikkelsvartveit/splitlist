@@ -116,6 +116,7 @@ function loadList() {
 
         var listNameEl = document.getElementById("list-name");
         listNameEl.innerHTML = list.name;
+        document.getElementById("edit-name-modal-input").value = list.name;
 
         var listIdEl = document.getElementById("list-id-id");
         listIdEl.innerHTML = listId.toUpperCase();
@@ -160,6 +161,7 @@ function reloadList() {
 
             if (listNameEl.innerHTML != list.name) {
                 listNameEl.innerHTML = list.name;
+                document.getElementById("edit-name-modal-input").value = list.name;
             }
 
             // Deletes items that has been removed from database
@@ -330,7 +332,7 @@ function updateListOrder() {
 }
 
 function editListName() {
-    var name = prompt("Enter your new list name:", list.name);
+    var name = document.getElementById("edit-name-modal-input").value;
 
     if (name) {
         var listNameEl = document.getElementById("list-name");
@@ -339,6 +341,8 @@ function editListName() {
         list.name = name;
         updateList();
     }
+
+    showModal("edit-name-modal", false);
 }
 
 function shareList() {
@@ -352,17 +356,6 @@ function shareList() {
     clipboardEl.style.display = "none";
 
     showSnackbar("link-copied-snackbar");
-}
-
-function newList() {
-    window.location.href = "/new";
-}
-
-function openList() {
-    var id = prompt("Input your list ID:");
-    if (id) {
-        window.location = "/list/?id=" + id;
-    }
 }
 
 // Initializing SortableJS
@@ -396,9 +389,22 @@ loadList();
 // Checks for changes in database every second
 window.setInterval(reloadList, 1000);
 
+
 // EVENT LISTENERS:
-document.getElementById("nav-open-list-button").addEventListener("click", openList);
-document.getElementById("nav-new-list-button").addEventListener("click", newList);
-document.getElementById("edit-name-button").addEventListener("click", editListName);
+
+document.getElementById("edit-name-button").addEventListener("click", function () {
+    showModal("edit-name-modal", true);
+});
+
 document.getElementById("share-list-button").addEventListener("click", shareList);
+
 document.getElementById("new-item-button").addEventListener("click", newListItem);
+
+document.getElementById("edit-name-modal-rename-button").addEventListener("click", editListName);
+
+document.getElementById("edit-name-modal-input").addEventListener("keypress", function (e) {
+    // Runs function if enter is pressed
+    if (e.keyCode == 13) {
+        editListName();
+    }
+});

@@ -41,11 +41,6 @@ h2 {
     font-weight: 600;
 }
 
-p {
-    line-height: 1.8;
-    font-weight: 600;
-}
-
 nav {
     position: fixed;
     top: 0;
@@ -137,6 +132,74 @@ nav .button img {
     max-width: 992px;
     margin: 65px auto;
     padding: 10px 3%;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    transition-duration: 0.2s;
+}
+
+.modal-hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition-duration: 0.1s;
+}
+
+.modal-content {
+    background-color: #FFF;
+    width: 90%;
+    max-width: 350px;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #444;
+    transition-duration: 0.2s;
+}
+
+.modal-hidden .modal-content {
+    transform: scale(0.9);
+}
+
+.modal h2 {
+    margin: 5px 0 20px 0;
+    font-size: 32px;
+    font-weight: 300;
+}
+
+.modal .divider {
+    margin: 20px auto;
+}
+
+
+.modal input {
+    width: 100%;
+    max-width: 200px;
+    padding: 5px 15px;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: inherit;
+    border: 3px solid #34AE91;
+    border-radius: 100px;
+    background-color: transparent;
+}
+
+.modal input:focus {
+    outline-color: #34AE91;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
 }
 
 .icon-button {
@@ -329,6 +392,11 @@ nav .button img {
     #main-buttons {
         flex-direction: column;
     }
+}
+
+p.feature {
+    line-height: 1.8;
+    font-weight: 600;
 }
 
 
