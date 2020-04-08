@@ -107,7 +107,6 @@ nav a {
 
 nav img {
     height: 30px;
-    image-rendering: crisp-edges;
 }
 
 nav .button {
@@ -154,7 +153,8 @@ nav .button img {
     margin: 0 8px 0 -2px;
 }
 
-.button:hover {
+.no-touch .button:hover,
+.button:active {
     background-color: var(--color-hover);
 }
 
@@ -164,7 +164,8 @@ nav .button img {
     border: none;
 }
 
-.button-teal:hover {
+.no-touch .button-teal:hover,
+.button-teal:active {
     background-color: #67C2AD;
 }
 
@@ -403,7 +404,8 @@ nav .button img {
     margin-left: 10px;
 }
 
-#recent-lists div:hover {
+.no-touch #recent-lists div:hover,
+#recent-lists div:active {
     background-color: var(--color-hover);
 }
 

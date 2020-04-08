@@ -2,11 +2,12 @@ function loadTheme() {
     // Temporarily disable CSS transitions
     document.body.classList.add("no-transition");
 
-    var img = document.querySelectorAll("img");
-    if (localStorage.getItem("theme") == "dark") {
-        for (var i = 0; i < img.length; i++) {
-            var src = img[i].getAttribute("src");
-            var newSrc = src.replace("/light-mode/", "/dark-mode/");
+    var img=document.querySelectorAll("img");
+
+    if (localStorage.getItem("theme")=="dark") {
+        for (var i=0; i < img.length; i++) {
+            var src=img[i].getAttribute("src");
+            var newSrc=src.replace("/light-mode/", "/dark-mode/");
             img[i].setAttribute("src", newSrc);
         }
 
@@ -15,9 +16,9 @@ function loadTheme() {
     }
 
     else {
-        for (var i = 0; i < img.length; i++) {
-            var src = img[i].getAttribute("src");
-            var newSrc = src.replace("/dark-mode/", "/light-mode/");
+        for (var i=0; i < img.length; i++) {
+            var src=img[i].getAttribute("src");
+            var newSrc=src.replace("/dark-mode/", "/light-mode/");
             img[i].setAttribute("src", newSrc);
         }
 
@@ -27,15 +28,19 @@ function loadTheme() {
 
     // Re-enable CSS transitions
     setTimeout(function () {
-        document.body.classList.remove("no-transition");
-    }, 200);
+            document.body.classList.remove("no-transition");
+        }
+
+        , 200);
 }
 
 // Toggle dark mode on/off
 function toggleDarkMode() {
-    if (localStorage.getItem("theme") == "dark") {
+    if (localStorage.getItem("theme")=="dark") {
         localStorage.setItem("theme", "light");
-    } else {
+    }
+
+    else {
         localStorage.setItem("theme", "dark");
     }
 
@@ -46,25 +51,61 @@ function toggleDarkMode() {
 function showModal(modalId, show) {
     if (show) {
         document.getElementById(modalId).classList.remove("modal-hidden");
-    } else {
+    }
+
+    else {
         document.getElementById(modalId).classList.add("modal-hidden");
     }
 }
 
 function newList() {
-    window.location = "/new";
+    window.location="/new";
 }
 
 function openList() {
-    var id = document.getElementById("open-list-modal-input").value;
+    var id=document.getElementById("open-list-modal-input").value;
 
     if (id) {
-        window.location = "/list/?id=" + id;
+        window.location="/list/?id="+id;
     }
 }
 
 // Check theme preference on load
 loadTheme();
+
+// Disables CSS hover effects on touch devices
+function watchForHover() {
+    var hasHoverClass=false;
+    var lastTouchTime=0;
+
+    function enableHover() {
+
+        // Discard emulated mouseMove events coming from touch events
+        if ( !hasHoverClass && new Date() - lastTouchTime >=500) {
+            document.body.classList.add("no-touch");
+            hasHoverClass=true;
+        }
+    }
+
+    function disableHover() {
+        if (hasHoverClass) {
+            document.body.classList.remove("no-touch");
+            hasHoverClass=false;
+        }
+    }
+
+    function updateLastTouchTime() {
+        lastTouchTime=new Date();
+    }
+
+    document.addEventListener('touchstart', updateLastTouchTime, true);
+    document.addEventListener('touchstart', disableHover, true);
+    document.addEventListener('mousemove', enableHover, true);
+
+    enableHover();
+}
+
+watchForHover();
 
 
 // EVENT LISTENERS:
@@ -74,31 +115,44 @@ document.getElementById("dark-mode-button").addEventListener("click", toggleDark
 document.getElementById("nav-new-list-button").addEventListener("click", newList);
 
 document.getElementById("nav-open-list-button").addEventListener("click", function () {
-    showModal("open-list-modal", true);
-    document.getElementById("open-list-modal").classList.remove("modal-hidden");
-});
+        showModal("open-list-modal", true);
+        document.getElementById("open-list-modal").classList.remove("modal-hidden");
+    }
+
+);
 
 document.getElementById("open-list-modal-open-button").addEventListener("click", openList);
+
 document.getElementById("open-list-modal-input").addEventListener("keypress", function (e) {
-    // Runs function if enter is pressed
-    if (e.keyCode == 13) {
-        openList();
+
+        // Runs function if enter is pressed
+        if (e.keyCode==13) {
+            openList();
+        }
     }
-});
+
+);
 
 // Code for closing any modal
-var modals = document.getElementsByClassName("modal");
-for (var i = 0; i < modals.length; i++) {
+var modals=document.getElementsByClassName("modal");
+
+for (var i=0; i < modals.length; i++) {
+
     // Close when clicking outside modal
     modals[i].addEventListener("click", function () {
-        if (event.target.classList.contains("modal")) {
-            showModal(this.id, false);
+            if (event.target.classList.contains("modal")) {
+                showModal(this.id, false);
+            }
         }
-    });
+
+    );
 
     // Close when clicking button
-    var closeButton = modals[i].getElementsByClassName("close-modal")[0];
+    var closeButton=modals[i].getElementsByClassName("close-modal")[0];
+
     closeButton.addEventListener("click", function () {
-        showModal(this.parentElement.parentElement.parentElement.parentElement.id, false);
-    });
+            showModal(this.parentElement.parentElement.parentElement.parentElement.id, false);
+        }
+
+    );
 }
