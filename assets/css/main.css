@@ -1,4 +1,34 @@
-/* ALL */
+/* ALL PAGES */
+
+/* Light mode (default) */
+:root {
+    --color-text: #555;
+    --color-text-secondary: #666;
+    --color-text-tertiary: #888;
+    --color-background: #FFF;
+    --color-hover: #F2F2F2;
+    --color-accent: #34AE91;
+    --color-accent-hover: #67C2AD;
+    --color-shadow: #888;
+    --color-shadow-dark: #444;
+    --color-highlight: #E6F5F1;
+    --color-divider: #CCC;
+}
+
+/* Dark mode */
+[data-theme="dark"] {
+    --color-text: #EEE;
+    --color-text-secondary: #EEE;
+    --color-text-tertiary: #AAA;
+    --color-background: #2E3233;
+    --color-hover: #3D4243;
+    --color-accent: #34AE91;
+    --color-accent-hover: #67C2AD;
+    --color-shadow: #000;
+    --color-shadow-dark: #000;
+    --color-highlight: #394743;
+    --color-divider: #555;
+}
 
 @font-face {
     font-family: "Open Sans";
@@ -21,12 +51,17 @@
     font-style: normal;
 }
 
+/* Class for temporarily disabling all transitions with Javascript */
+.no-transition * {
+    transition: none !important;
+}
+
 body {
     font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 16px;
     line-height: 1.4;
-    color: #444;
-    background-color: #FFF;
+    color: var(--color-text);
+    background-color: var(--color-background);
 }
 
 h1 {
@@ -48,8 +83,8 @@ nav {
     display: flex;
     width: 100%;
     height: 70px;
-    background-color: #fff;
-    box-shadow: 0 0 8px #888;
+    background-color: var(--color-background);
+    box-shadow: 0 0 8px var(--color-shadow);
 }
 
 .nav-content {
@@ -84,6 +119,11 @@ nav .button img {
     margin-right: 5px;
 }
 
+#dark-mode-button {
+    margin-left: 20px;
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 600px) {
     #nav-open-list-button {
         display: none;
@@ -97,15 +137,15 @@ nav .button img {
     padding: 12px 18px;
     border: none;
     border-radius: 100px;
-    box-shadow: 0 1px 8px #888;
-    color: #666;
-    background-color: #FFF;
+    box-shadow: 0 1px 8px var(--color-shadow);
+    color: var(--color-text-secondary);
+    background-color: var(--color-background);
     font-family: inherit;
     font-size: 14px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
-    outline-color: #34AE91;
+    outline-color: var(--color-accent);
     transition: background-color 0.2s;
 }
 
@@ -115,11 +155,11 @@ nav .button img {
 }
 
 .button:hover {
-    background-color: #F2F2F2;
+    background-color: var(--color-hover);
 }
 
 .button-teal {
-    background-color: #34AE91;
+    background-color: var(--color-accent);
     color: #FFF;
     border: none;
 }
@@ -154,14 +194,14 @@ nav .button img {
 }
 
 .modal-content {
-    background-color: #FFF;
+    background-color: var(--color-background);
     width: 90%;
     max-width: 350px;
     padding: 20px;
     box-sizing: border-box;
     text-align: center;
     border-radius: 5px;
-    box-shadow: 0 0 10px #444;
+    box-shadow: 0 0 10px var(--color-shadow-dark);
     transition-duration: 0.2s;
 }
 
@@ -181,19 +221,19 @@ nav .button img {
 
 
 .modal input {
-    width: 100%;
-    max-width: 200px;
-    padding: 5px 15px;
+    width: 90%;
+    padding: 7px 10px;
     box-sizing: border-box;
     font-family: inherit;
     font-size: inherit;
-    border: 3px solid #34AE91;
-    border-radius: 100px;
+    color: inherit;
+    border: 3px solid var(--color-accent);
+    border-radius: 5px;
     background-color: transparent;
 }
 
 .modal input:focus {
-    outline-color: #34AE91;
+    outline-color: var(--color-accent);
 }
 
 .modal-buttons {
@@ -227,14 +267,7 @@ nav .button img {
     width: 99%;
     height: 0;
     margin: 50px auto;
-    border-bottom: 1px solid #CCC;
-}
-
-.divider-small {
-    max-width: 594px;
-    height: 0;
-    margin: 30px auto;
-    border-bottom: 1px solid #CCC;
+    border-bottom: 1px solid var(--color-divider);
 }
 
 .center {
@@ -266,7 +299,7 @@ nav .button img {
     padding: 15px 25px;
     background-color: #444;
     border-radius: 3px;
-    box-shadow: 0 1px 8px #333;
+    box-shadow: 0 1px 8px var(--color-shadow-dark);
 }
 
 .snackbar-show {
@@ -306,7 +339,7 @@ nav .button img {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #666;
+    color: var(--color-text-secondary);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -326,7 +359,7 @@ nav .button img {
 
 #recent-lists-section h2 {
     text-align: center;
-    color: #555;
+    color: var(--color-text);
     margin-top: 50px;
 }
 
@@ -343,7 +376,7 @@ nav .button img {
     justify-content: space-between;
     align-items: center;
     flex-grow: 1;
-    color: #555;
+    color: var(--color-text);
     text-decoration: none;
     padding: 5px 5px 5px 10px;
     min-width: 0;
@@ -365,13 +398,13 @@ nav .button img {
 
 #recent-lists div .list-last-edited {
     font-size: 12px;
-    color: #888;
+    color: var(--color-text-tertiary);
     white-space: nowrap;
     margin-left: 10px;
 }
 
 #recent-lists div:hover {
-    background-color: #EFEFEF;
+    background-color: var(--color-hover);
 }
 
 @media only screen and (max-width: 768px) {
@@ -418,7 +451,7 @@ p.feature {
     display: flex;
     align-items: center;
     padding: 10px;
-    border-bottom: 1px solid #CCC;
+    border-bottom: 1px solid var(--color-divider);
     transition: background-color 0.2s;
 }
 
@@ -427,12 +460,13 @@ p.feature {
     padding: 3px 10px 4px 10px;
     font-family: inherit;
     font-size: 16px;
+    color: inherit;
     border: none;
     background-color: transparent;
 }
 
 .list-item>.text:focus {
-    outline-color: #34AE91;
+    outline-color: var(--color-accent);
 }
 
 .list-item .icon-button {
@@ -449,14 +483,14 @@ p.feature {
 }
 
 .sortable-ghost {
-    background-color: #E6F5F1;
+    background-color: var(--color-highlight);
     order: none;
 }
 
 #list-id {
     font-size: 18px;
     font-weight: 400;
-    color: #666;
+    color: var(--color-text-secondary);
     text-align: center;
     margin: 0 0 0 0;
 }
@@ -464,7 +498,7 @@ p.feature {
 #item-count {
     font-size: 18px;
     font-weight: 400;
-    color: #666;
+    color: var(--color-text-secondary);
     text-align: center;
     margin: 0 0 20px 0;
 }

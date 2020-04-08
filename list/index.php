@@ -24,6 +24,8 @@
     <meta name="theme-color" content="#ffffff">
 
     <title>Splitlist</title>
+
+    <script src="/assets/js/theme.js"></script>
 </head>
 
 <body>
@@ -31,21 +33,19 @@
         <div class="nav-content">
             <div class="nav-left">
                 <a href="/">
-                    <img id="nav-logo" src="/assets/img/logo.png" alt="Splitlist">
+                    <img id="nav-logo" src="/assets/img/light-mode/logo.png" alt="Splitlist">
                 </a>
             </div>
 
             <div class="nav-right">
-                <button id="nav-open-list-button" class="button"><img src="/assets/icons/open.svg" alt="Open">Open</button>
-                <button id="nav-new-list-button" class="button button-teal"><img src="/assets/icons/add-light.svg" alt="New">New</button>
+                <button id="nav-open-list-button" class="button"><img src="/assets/icons/light-mode/open.svg" alt="Open">Open</button>
+                <button id="nav-new-list-button" class="button button-teal"><img src="/assets/icons/always-light//add.svg" alt="New">New</button>
+                <img id="dark-mode-button" src="/assets/icons/light-mode/dark-mode.svg" alt="Toggle dark mode">
             </div>
         </div>
     </nav>
 
     <div class="content">
-        <!-- <a href="/"><img id="logo-small" src="/assets/img/logo.png" alt="Logo"></a>
-        <div class="divider-small"></div> -->
-
         <h1 id="list-name"></h1>
 
         <p id="list-id">List ID: <b id="list-id-id"></b></p>
@@ -53,12 +53,12 @@
 
         <div class="button-group">
             <button class="button" id="edit-name-button">
-                <img src="/assets/icons/edit.svg" alt="">
+                <img src="/assets/icons/light-mode/edit.svg" alt="">
                 <span>Edit name</span>
             </button>
 
             <button class="button button-teal" id="share-list-button">
-                <img src="/assets/icons/share-light.svg" alt="">
+                <img src="/assets/icons/always-light/share.svg" alt="">
                 <span>Copy link</span>
             </button>
         </div>
@@ -67,7 +67,7 @@
 
         </div>
 
-        <button class="button center" id="new-item-button"><img src="/assets/icons/add.svg" alt="Add"> New item</button>
+        <button class="button center" id="new-item-button"><img src="/assets/icons/light-mode/add.svg" alt="Add"> New item</button>
     </div>
 
     <div id="open-list-modal" class="modal modal-hidden">
@@ -109,7 +109,7 @@
 
     <!-- Hidden sample element for list items -->
     <div id="sample-list-item" class="list-item hidden">
-        <img src="/assets/icons/drag-handle.svg" alt="Handle" class="drag-handle">
+        <img src="/assets/icons/light-mode/drag-handle.svg" alt="Handle" class="drag-handle">
 
         <!-- <button class="icon-button check-button" tabindex="-1">
             <img src="/assets/icons/checkbox-unchecked.svg" alt="Check">
@@ -118,7 +118,7 @@
         <input type="text" class="text" value=""></span>
 
         <button class="icon-button remove-button" tabindex="-1">
-            <img src="/assets/icons/remove.svg" alt="Remove">
+            <img src="/assets/icons/light-mode/remove.svg" alt="Remove">
         </button>
     </div>
 

@@ -6,7 +6,7 @@ if (isset($_GET["i"])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -30,6 +30,8 @@ if (isset($_GET["i"])) {
     <meta name="theme-color" content="#ffffff">
 
     <title>Splitlist - The quick way to share lists for anything.</title>
+
+    <script src="/assets/js/theme.js"></script>
 </head>
 
 <body>
@@ -37,13 +39,14 @@ if (isset($_GET["i"])) {
         <div class="nav-content">
             <div class="nav-left">
                 <a href="/">
-                    <img id="nav-logo" src="/assets/img/logo.png" alt="Splitlist">
+                    <img id="nav-logo" src="/assets/img/light-mode/logo.png" alt="Splitlist">
                 </a>
             </div>
 
             <div class="nav-right">
-                <button id="nav-open-list-button" class="button"><img src="/assets/icons/open.svg" alt="Open">Open</button>
-                <button id="nav-new-list-button" class="button button-teal"><img src="/assets/icons/add-light.svg" alt="New">New</button>
+                <button id="nav-open-list-button" class="button"><img src="/assets/icons/light-mode/open.svg" alt="Open">Open</button>
+                <button id="nav-new-list-button" class="button button-teal"><img src="/assets/icons/always-light/add.svg" alt="New">New</button>
+                <img id="dark-mode-button" src="/assets/icons/light-mode/dark-mode.svg" alt="Toggle dark mode">
             </div>
         </div>
     </nav>
@@ -109,7 +112,7 @@ if (isset($_GET["i"])) {
         </a>
 
         <button class="icon-button remove-button" tabindex="-1">
-            <img src="/assets/icons/remove.svg" alt="Remove">
+            <img src="/assets/icons/light-mode/remove.svg" alt="Remove">
         </button>
     </div>
 
