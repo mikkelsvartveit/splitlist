@@ -6,7 +6,7 @@ if (isset($_GET["i"])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -29,7 +29,7 @@ if (isset($_GET["i"])) {
     <meta name="msapplication-config" content="/assets/favicons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
 
-    <title>Splitlist - The quick way to share lists for anything.</title>
+    <title>Splitlist - The quick way to share lists for anything</title>
 
     <script src="/assets/js/theme.js"></script>
 </head>

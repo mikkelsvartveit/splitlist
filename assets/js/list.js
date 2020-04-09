@@ -80,7 +80,7 @@ function updateRecentLists() {
     localStorage.setItem("recentLists", JSON.stringify(recentLists));
 }
 
-function addItemToList(id, text, index) {
+function addItemToList(id, text, index, checked) {
     var listArray = JSON.parse(list.data);
     var listEl = document.getElementById("list");
 
@@ -93,6 +93,14 @@ function addItemToList(id, text, index) {
     var listItemTextEl = listItemEl.querySelector(".text");
     listItemTextEl.setAttribute("value", text);
     listItemTextEl.addEventListener("input", updateListItem);
+
+    var listItemCheckButton = listItemEl.querySelector(".check-button");
+    if (checked) {
+        var imgEl = listItemCheckButton.querySelector("img")
+        imgEl.src = imgEl.src.replace("checkbox-unchecked.svg", "checkbox-checked.svg");
+        listItemEl.classList.add("checked");
+    }
+    listItemCheckButton.addEventListener("click", toggleCheckedListItem);
 
     var listItemDeleteButtonEl = listItemEl.querySelector(".remove-button");
     listItemDeleteButtonEl.addEventListener("click", deleteListItem);
@@ -127,12 +135,12 @@ function loadList() {
         });
 
         for (var i = 0; i < listArray.length; i++) {
-            addItemToList(listArray[i].id, listArray[i].text, listArray[i].index);
+            addItemToList(listArray[i].id, listArray[i].text, listArray[i].index, listArray[i].checked);
         }
 
         updateRecentLists();
 
-        console.log("List loaded!");
+        // console.log("List loaded!");
     });
 }
 
@@ -143,7 +151,7 @@ function reloadList() {
             pendingAjaxGetRequest = false;
 
             if (responseText) {
-                console.log("AJAX response received, processing changes...");
+                // console.log("AJAX response received, processing changes...");
 
                 // Checks if list has changed
                 var responseObject = JSON.parse(responseText);
@@ -181,7 +189,7 @@ function reloadList() {
                 }
             }
             for (var i = 0; i < elementsToDelete.length; i++) {
-                console.log("Deleted element found, removing it from list...");
+                // console.log("Deleted element found, removing it from list...");
                 elementsToDelete[i].parentNode.removeChild(elementsToDelete[i]);
             }
 
@@ -192,9 +200,18 @@ function reloadList() {
                 for (var j = 0; j < listEl.children.length; j++) {
                     if (listEl.children[j].getAttribute("data-list-id") == listArray[i].id) {
                         var listItemTextEl = listEl.children[j].querySelector(".text");
+                        var checkboxImgEl = listEl.children[j].querySelector(".check-button img");
 
                         if (document.activeElement != listItemTextEl) {
                             listItemTextEl.value = listArray[i].text;
+
+                            if (listArray[i].checked) {
+                                checkboxImgEl.src = checkboxImgEl.src.replace("checkbox-unchecked.svg", "checkbox-checked.svg");
+                                listEl.children[j].classList.add("checked");
+                            } else {
+                                checkboxImgEl.src = checkboxImgEl.src.replace("checkbox-checked.svg", "checkbox-unchecked.svg");
+                                listEl.children[j].classList.remove("checked");
+                            }
                         }
 
                         listEl.children[j].setAttribute("data-list-index", listArray[i].index);
@@ -205,8 +222,8 @@ function reloadList() {
                 }
 
                 if (isNewElement) {
-                    console.log("New element found, adding it to list...");
-                    addItemToList(listArray[i].id, listArray[i].text);
+                    // console.log("New element found, adding it to list...");
+                    addItemToList(listArray[i].id, listArray[i].text, listArray[i].index, listArray[i].checked);
                 }
             }
 
@@ -266,13 +283,39 @@ function newListItem() {
     newElement.id = newId;
     newElement.text = "";
     newElement.index = listArray.length;
+    newElement.checked = false;
 
-    var addedElement = addItemToList(newElement.id, newElement.text);
+    var addedElement = addItemToList(newElement.id, newElement.text, newElement.index, newElement.checked);
     addedElement.querySelector(".text").focus();
 
     listArray.push(newElement);
     list.data = JSON.stringify(listArray);
     updateList();
+}
+
+function toggleCheckedListItem() {
+    var itemId = this.parentElement.getAttribute("data-list-id");
+    var imgEl = this.querySelector("img");
+    var listItemEl = this.parentElement;
+
+    var listArray = JSON.parse(list.data);
+    for (var i = 0; i < listArray.length; i++) {
+        if (listArray[i].id == itemId) {
+            listArray[i].checked = !listArray[i].checked;
+
+            if (listArray[i].checked) {
+                imgEl.src = imgEl.src.replace("checkbox-unchecked.svg", "checkbox-checked.svg");
+                listItemEl.classList.add("checked");
+            } else {
+                imgEl.src = imgEl.src.replace("checkbox-checked.svg", "checkbox-unchecked.svg");
+                listItemEl.classList.remove("checked");
+            }
+
+            list.data = JSON.stringify(listArray);
+            updateList();
+            break;
+        }
+    }
 }
 
 function deleteListItem() {

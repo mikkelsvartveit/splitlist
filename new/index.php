@@ -23,7 +23,7 @@ do {
 } while ($result->num_rows > 0);
 
 $name = "Unnamed list";
-$data = '[{"id":0,"text":"Item 1","index":1}]';
+$data = '[{"id":0,"text":"Item 1","index":1,"checked":false}]';
 
 $sql = "INSERT INTO list (idlist, name, lastedited, data) VALUES('$id', '$name', NOW(), '$data')";
 $conn->query($sql);

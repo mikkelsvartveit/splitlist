@@ -172,7 +172,7 @@ nav .button img {
 .content {
     max-width: 992px;
     margin: 65px auto;
-    padding: 10px 3%;
+    padding: 10px 1%;
 }
 
 .modal {
@@ -465,14 +465,24 @@ p.feature {
     color: inherit;
     border: none;
     background-color: transparent;
+    transition-duration: 0.1s;
 }
 
 .list-item>.text:focus {
     outline-color: var(--color-accent);
 }
 
+.list-item.checked>.text {
+    color: var(--color-text-tertiary);
+    text-decoration: line-through;
+}
+
 .list-item .icon-button {
     margin: 0 0 0 5px;
+}
+
+.list-item .icon-button:focus {
+    outline-color: var(--color-accent);
 }
 
 .list-item .drag-handle {

@@ -63,7 +63,7 @@
             </button>
         </div>
 
-        <div class="list" id="list">
+        <div id="list" class="list">
 
         </div>
 
@@ -111,9 +111,9 @@
     <div id="sample-list-item" class="list-item hidden">
         <img src="/assets/icons/light-mode/drag-handle.svg" alt="Handle" class="drag-handle">
 
-        <!-- <button class="icon-button check-button" tabindex="-1">
-            <img src="/assets/icons/checkbox-unchecked.svg" alt="Check">
-        </button> -->
+        <button class="icon-button check-button" tabindex="-1">
+            <img src="/assets/icons/light-mode/checkbox-unchecked.svg" alt="Check">
+        </button>
 
         <input type="text" class="text" value=""></span>
 

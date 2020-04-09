@@ -61,7 +61,7 @@ function newList() {
 }
 
 function openList() {
-    var id = document.getElementById("open-list-modal-input").value;
+    var id = document.getElementById("open-list-modal-input").value.toLowerCase();
 
     if (id) {
         window.location = "/list/?id=" + id;
