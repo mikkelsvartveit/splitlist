@@ -81,7 +81,6 @@ function updateRecentLists() {
 }
 
 function addItemToList(id, text, index, checked) {
-    var listArray = JSON.parse(list.data);
     var listEl = document.getElementById("list");
 
     var listItemEl = document.getElementById("sample-list-item").cloneNode(true);
@@ -93,6 +92,20 @@ function addItemToList(id, text, index, checked) {
     var listItemTextEl = listItemEl.querySelector(".text");
     listItemTextEl.setAttribute("value", text);
     listItemTextEl.addEventListener("input", updateListItem);
+    listItemTextEl.addEventListener("keypress", function (e) {
+        // If enter is pressed
+        if (e.keyCode == 13) {
+            var index = Array.from(listEl.children).indexOf(listItemEl);
+            if (index < listEl.children.length - 1) {
+                // Jump cursor to next item on list, like a tab press would do
+                var nextItem = listEl.children[index + 1].querySelector(".text");
+                nextItem.select();
+            } else {
+                // Create a new item if the cursor is on the last item in the list
+                newListItem();
+            }
+        }
+    });
 
     var listItemCheckButton = listItemEl.querySelector(".check-button");
     if (checked) {
