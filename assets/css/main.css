@@ -73,6 +73,12 @@ h1 {
 }
 
 h2 {
+    font-size: 32px;
+    font-weight: 300;
+}
+
+h3 {
+    font-size: 24px;
     font-weight: 600;
 }
 
@@ -212,8 +218,6 @@ nav .button img {
 
 .modal h2 {
     margin: 5px 0 20px 0;
-    font-size: 32px;
-    font-weight: 300;
 }
 
 .modal .divider {
@@ -320,13 +324,13 @@ nav .button img {
 .row-3 {
     display: flex;
     flex-wrap: wrap;
-    margin: -15px;
+    justify-content: space-between;
+    padding: 0 5px;
 }
 
 .row-3>* {
     display: block;
-    width: 33.33%;
-    padding: 20px;
+    width: calc(33.33% - 25px);
     box-sizing: border-box;
 }
 
@@ -358,7 +362,7 @@ nav .button img {
     margin: auto;
 }
 
-#recent-lists-section h2 {
+#recent-lists-section h3 {
     text-align: center;
     color: var(--color-text);
     margin-top: 50px;
@@ -409,9 +413,15 @@ nav .button img {
     background-color: var(--color-hover);
 }
 
+p.feature {
+    line-height: 1.8;
+    font-weight: 600;
+}
+
 @media only screen and (max-width: 768px) {
     .row-3 {
         flex-direction: column;
+        padding: 0 10px;
     }
 
     .row-3>* {
@@ -429,13 +439,14 @@ nav .button img {
     }
 }
 
-p.feature {
-    line-height: 1.8;
-    font-weight: 600;
-}
-
 
 /* LIST PAGE */
+
+#loading-spinner {
+    display: block;
+    width: 64px;
+    margin: 30px auto;
+}
 
 #list-name {
     margin-bottom: 10px;
@@ -513,6 +524,11 @@ p.feature {
     color: var(--color-text-secondary);
     text-align: center;
     margin: 0 0 20px 0;
+}
+
+#no-list-error {
+    text-align: center;
+    padding-top: 20px;
 }
 
 #clipboard-placeholder {

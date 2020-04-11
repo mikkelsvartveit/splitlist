@@ -130,30 +130,44 @@ function loadList() {
     ajaxGetList(listId, list.lastedited, function (responseText) {
         pendingAjaxGetRequest = false;
 
-        var responseObject = JSON.parse(responseText);
-        list = responseObject;
+        try {
+            if (responseText !== "null") {
+                var responseObject = JSON.parse(responseText);
+                list = responseObject;
 
-        document.title = list.name + " - Splitlist";
+                document.title = list.name + " - Splitlist";
 
-        var listNameEl = document.getElementById("list-name");
-        listNameEl.innerHTML = list.name;
-        document.getElementById("edit-name-modal-input").value = list.name;
+                var listNameEl = document.getElementById("list-name");
+                listNameEl.innerHTML = list.name;
+                document.getElementById("edit-name-modal-input").value = list.name;
 
-        var listIdEl = document.getElementById("list-id-id");
-        listIdEl.innerHTML = listId.toUpperCase();
+                var listIdEl = document.getElementById("list-id-id");
+                listIdEl.innerHTML = listId.toUpperCase();
 
-        var listArray = JSON.parse(list.data);
-        listArray.sort(function (a, b) {
-            return a.index - b.index;
-        });
+                var listArray = JSON.parse(list.data);
+                listArray.sort(function (a, b) {
+                    return a.index - b.index;
+                });
 
-        for (var i = 0; i < listArray.length; i++) {
-            addItemToList(listArray[i].id, listArray[i].text, listArray[i].index, listArray[i].checked);
+                for (var i = 0; i < listArray.length; i++) {
+                    addItemToList(listArray[i].id, listArray[i].text, listArray[i].index, listArray[i].checked);
+                }
+
+                document.getElementById("loading").classList.add("hidden");
+                document.getElementById("list-content").classList.remove("hidden");
+
+                updateRecentLists();
+            } else {
+                clearInterval(autoReload);
+
+                document.getElementById("no-list-id").innerHTML = listId.toUpperCase();
+                document.getElementById("loading").classList.add("hidden");
+                document.getElementById("no-list-error").classList.remove("hidden");
+            }
+        } catch (err) {
+            clearInterval(autoReload);
+            console.error(responseText);
         }
-
-        updateRecentLists();
-
-        // console.log("List loaded!");
     });
 }
 
@@ -164,8 +178,6 @@ function reloadList() {
             pendingAjaxGetRequest = false;
 
             if (responseText) {
-                // console.log("AJAX response received, processing changes...");
-
                 // Checks if list has changed
                 var responseObject = JSON.parse(responseText);
                 list = responseObject;
@@ -443,7 +455,7 @@ var list = {};
 loadList();
 
 // Checks for changes in database every second
-window.setInterval(reloadList, 1000);
+var autoReload = window.setInterval(reloadList, 1000);
 
 
 // EVENT LISTENERS:

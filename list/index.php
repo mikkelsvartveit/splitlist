@@ -39,13 +39,17 @@
 
             <div class="nav-right">
                 <button id="nav-open-list-button" class="button"><img src="/assets/icons/light-mode/open.svg" alt="Open">Open</button>
-                <button id="nav-new-list-button" class="button button-teal"><img src="/assets/icons/always-light//add.svg" alt="New">New</button>
+                <button id="nav-new-list-button" class="button button-teal"><img src="/assets/icons/always-light/add.svg" alt="New">New</button>
                 <img id="dark-mode-button" src="/assets/icons/light-mode/dark-mode.svg" alt="Toggle dark mode">
             </div>
         </div>
     </nav>
 
-    <div class="content">
+    <div id="loading" class="content">
+        <img id="loading-spinner" src="/assets/icons/loading.svg" alt="Loading...">
+    </div>
+
+    <div id="list-content" class="content hidden">
         <h1 id="list-name"></h1>
 
         <p id="list-id">List ID: <b id="list-id-id"></b></p>
@@ -68,6 +72,11 @@
         </div>
 
         <button class="button center" id="new-item-button"><img src="/assets/icons/light-mode/add.svg" alt="Add"> New item</button>
+    </div>
+
+    <div id="no-list-error" class="content hidden">
+        <h2>List not found!</h2>
+        <p>There is no existing list with the ID <b id="no-list-id"></b>.</p>
     </div>
 
     <div id="open-list-modal" class="modal modal-hidden">

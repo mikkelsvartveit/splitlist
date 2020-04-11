@@ -61,7 +61,7 @@ if (isset($_GET["i"])) {
         </div>
 
         <div id="recent-lists-section" class="hidden">
-            <h2>Recently opened lists</h2>
+            <h3>Recently opened lists</h3>
             <div id="recent-lists">
 
             </div>
