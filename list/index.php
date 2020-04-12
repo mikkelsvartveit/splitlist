@@ -99,7 +99,7 @@
     <div id="edit-name-modal" class="modal modal-hidden">
         <div class="modal-content">
             <h2>Edit list name</h2>
-            <input type="text" id="edit-name-modal-input" placeholder="New name">
+            <input type="text" id="edit-name-modal-input" placeholder="New name" maxlength="45">
             <div class="modal-buttons">
                 <div>
                     <button class="button close-modal">Cancel</button>

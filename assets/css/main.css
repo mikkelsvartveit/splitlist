@@ -506,10 +506,6 @@ p.feature {
     outline: 0;
 }
 
-.list-item.hidden {
-    display: none;
-}
-
 .sortable-ghost {
     background-color: var(--color-highlight);
     order: none;
