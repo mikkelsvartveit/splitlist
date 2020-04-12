@@ -124,7 +124,7 @@
             <img src="/assets/icons/light-mode/checkbox-unchecked.svg" alt="Check">
         </button>
 
-        <input type="text" class="text" value=""></span>
+        <input type="text" class="text" value="">
 
         <button class="icon-button remove-button" tabindex="-1">
             <img src="/assets/icons/light-mode/remove.svg" alt="Remove">

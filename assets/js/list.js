@@ -64,7 +64,14 @@ function showSnackbar(id) {
 function updateRecentLists() {
     var recentLists = JSON.parse(localStorage.getItem("recentLists")) || [];
 
-    var index = recentLists.findIndex(list => list.id == listId);
+    var index;
+    for (var i = 0; i < recentLists.length; i++) {
+        if (recentLists[i].id == listId) {
+            index = i;
+            break;
+        }
+    }
+
     if (index >= 0) {
         recentLists[index].name = list.name;
         recentLists[index].time = new Date();
@@ -272,9 +279,10 @@ function reloadList() {
             }
 
             // Reorders list if order has changed
-            if (!document.activeElement.classList.contains("text") && !isDragging) {
-                var itemsArray = Array.from(listEl.children);
-                var sortedItemsArray = Array.from(listEl.children).sort(function (a, b) {
+            if ((!document.activeElement || !document.activeElement.classList.contains("text")) && !isDragging) {
+                // Creates array from children
+                var itemsArray = [].slice.call(listEl.children);
+                var sortedItemsArray = itemsArray.slice(0).sort(function (a, b) {
                     return a.getAttribute("data-list-index") - b.getAttribute("data-list-index");
                 });
 

@@ -1,0 +1,14 @@
+/* Dark mode (separate file for legacy browsers like IE11) */
+:root {
+    --color-text: #EEE;
+    --color-text-secondary: #EEE;
+    --color-text-tertiary: #AAA;
+    --color-background: #2E3233;
+    --color-hover: #3D4243;
+    --color-accent: #34AE91;
+    --color-accent-hover: #67C2AD;
+    --color-shadow: #000;
+    --color-shadow-dark: #000;
+    --color-highlight: #394743;
+    --color-divider: #555;
+}

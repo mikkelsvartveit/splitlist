@@ -32,7 +32,14 @@ function removeRecentList() {
     var id = this.parentElement.getAttribute("data-list-id");
     var recentLists = JSON.parse(localStorage.getItem("recentLists"));
 
-    var indexToRemove = recentLists.findIndex(list => list.id == id);
+    var indexToRemove;
+    for (var i = 0; i < recentLists.length; i++) {
+        if (recentLists[i].id == id) {
+            indexToRemove = i;
+            break;
+        }
+    }
+
     recentLists.splice(indexToRemove, 1);
     localStorage.setItem("recentLists", JSON.stringify(recentLists));
 
@@ -43,7 +50,9 @@ function loadRecentLists() {
     var recentLists = JSON.parse(localStorage.getItem("recentLists"));
 
     if (recentLists && recentLists.length > 0) {
-        recentLists.sort((a, b) => Date.parse(b.time) - Date.parse(a.time));
+        recentLists.sort(function (a, b) {
+            return Date.parse(b.time) - Date.parse(a.time);
+        });
 
         var listEl = document.getElementById("recent-lists");
         while (listEl.firstChild) {

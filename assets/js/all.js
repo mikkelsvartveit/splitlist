@@ -11,8 +11,21 @@ function loadTheme() {
             img[i].setAttribute("src", newSrc);
         }
 
-        document.documentElement.setAttribute("data-theme", "dark");
-        document.querySelector("meta[name='theme-color']").setAttribute("content", "#2e3233");
+        // Check if browser support CSS variables and provide fallback
+        if (supportsCssVars) {
+            document.documentElement.setAttribute("data-theme", "dark");
+            document.querySelector("meta[name='theme-color']").setAttribute("content", "#2e3233");
+        } else {
+            // Load separate dark mode CSS file
+            var css = document.createElement("link");
+            css.id = "dark-mode";
+            css.setAttribute("rel", "stylesheet");
+            css.setAttribute("href", "/assets/css/dark-mode.css");
+            document.head.appendChild(css);
+
+            // Call CSS variables ponyfill
+            cssVars();
+        }
     }
 
     else {
@@ -22,8 +35,20 @@ function loadTheme() {
             img[i].setAttribute("src", newSrc);
         }
 
-        document.documentElement.removeAttribute("data-theme");
-        document.querySelector("meta[name='theme-color']").setAttribute("content", "#ffffff");
+        // Check if browser support CSS variables and provide fallback
+        if (supportsCssVars) {
+            document.documentElement.removeAttribute("data-theme");
+            document.querySelector("meta[name='theme-color']").setAttribute("content", "#ffffff");
+        } else {
+            // Remove separate dark mode CSS file
+            var css = document.getElementById("dark-mode");
+            if (css) {
+                document.head.removeChild(css);
+            }
+
+            // Call CSS variables ponyfill
+            cssVars();
+        }
     }
 
     // Re-enable CSS transitions
