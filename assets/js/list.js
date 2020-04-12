@@ -92,12 +92,31 @@ function addItemToList(id, text, index, checked) {
     var listItemTextEl = listItemEl.querySelector(".text");
     listItemTextEl.setAttribute("value", text);
     listItemTextEl.addEventListener("input", updateListItem);
-    listItemTextEl.addEventListener("keypress", function (e) {
-        // If enter is pressed
-        if (e.keyCode == 13) {
-            var index = Array.from(listEl.children).indexOf(listItemEl);
+    listItemTextEl.addEventListener("keydown", function (e) {
+        var index = Array.from(listEl.children).indexOf(listItemEl);
+
+        // If arrow up is pressed
+        if (e.keyCode == 38) {
+            if (index > 0) {
+                // Move cursor to previous item on list
+                var previousItem = listEl.children[index - 1].querySelector(".text");
+                previousItem.focus();
+            }
+        }
+
+        // If arrow down is pressed
+        if (e.keyCode == 40) {
             if (index < listEl.children.length - 1) {
-                // Jump cursor to next item on list, like a tab press would do
+                // Move cursor to next item on list
+                var nextItem = listEl.children[index + 1].querySelector(".text");
+                nextItem.focus();
+            }
+        }
+
+        // If enter is pressed
+        else if (e.keyCode == 13) {
+            if (index < listEl.children.length - 1) {
+                // Move cursor to next item on list
                 var nextItem = listEl.children[index + 1].querySelector(".text");
                 nextItem.select();
             } else {
@@ -459,6 +478,10 @@ var autoReload = window.setInterval(reloadList, 1000);
 
 
 // EVENT LISTENERS:
+
+document.getElementById("list-name").addEventListener("click", function () {
+    showModal("edit-name-modal", true);
+})
 
 document.getElementById("edit-name-button").addEventListener("click", function () {
     showModal("edit-name-modal", true);

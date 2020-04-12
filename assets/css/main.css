@@ -450,6 +450,7 @@ p.feature {
 
 #list-name {
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .list {
@@ -499,6 +500,10 @@ p.feature {
 .list-item .drag-handle {
     vertical-align: bottom;
     cursor: grab;
+}
+
+.list-item .check-button:focus {
+    outline: 0;
 }
 
 .list-item.hidden {
