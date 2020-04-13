@@ -19,3 +19,4 @@ $conn->query($sql);
 if ($conn->error) {
     echo ("Error: $conn->errno - $conn->error");
 }
+?>

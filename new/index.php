@@ -4,8 +4,7 @@ $db_config = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . "/../private/db_config.i
 $conn = new mysqli($db_config["servername"], $db_config["username"], $db_config["password"], $db_config["dbname"]);
 
 // Function for generating a random ID
-function generateId()
-{
+function generateId() {
     $characters = "abcdefghijklmnopqrstuvwxyz0123456789";
     $id = "";
 
@@ -35,3 +34,4 @@ if ($conn->error) {
     $url = "/list/?id=$id";
     echo "<script>window.location = '$url'</script>";
 }
+?>

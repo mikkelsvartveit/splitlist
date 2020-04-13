@@ -2,13 +2,15 @@
 <html lang="en">
 
 <head>
+    <title>Splitlist - The quick way to share lists for anything</title>
+
     <meta charset="UTF-8">
     <meta name="description" content="Create, share and collaborate on to-do lists, shopping lists and more. No registration required!">
     <meta name="keywords" content="list,share,collaborate,easy,easily,quick,quickly">
-    <meta name="robots" content="noindex">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="robots" content="noindex">
 
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
@@ -22,8 +24,6 @@
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="msapplication-config" content="/assets/favicons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
-
-    <title>Splitlist</title>
 
     <script src="/assets/js/theme.js"></script>
 </head>
@@ -50,7 +50,7 @@
     </div>
 
     <div id="list-content" class="content hidden">
-        <h1 id="list-name"></h1>
+        <h1 class="list-name"><span id="list-name"></span></h1>
 
         <p id="list-id">List ID: <b id="list-id-id"></b></p>
         <p id="item-count"><span id="item-count-number">0</span> items</p>

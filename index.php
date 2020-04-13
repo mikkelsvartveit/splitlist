@@ -9,12 +9,14 @@ if (isset($_GET["i"])) {
 <html lang="en">
 
 <head>
+    <title>Splitlist - The quick way to share lists for anything</title>
+
     <meta charset="UTF-8">
     <meta name="description" content="Create, share and collaborate on to-do lists, shopping lists and more. No registration required!">
     <meta name="keywords" content="list,share,collaborate,easy,easily,quick,quickly">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
@@ -28,8 +30,6 @@ if (isset($_GET["i"])) {
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="msapplication-config" content="/assets/favicons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
-
-    <title>Splitlist - The quick way to share lists for anything</title>
 
     <script src="/assets/js/theme.js"></script>
 </head>
@@ -54,7 +54,7 @@ if (isset($_GET["i"])) {
     <div class="content">
         <h1>The quick way to share lists for anything.</h1>
 
-        <div id="main-buttons">
+        <div id="main-buttons" class="button-group">
             <button class="button button-teal" id="new-list-button">Create a new list</button>
             <span>or</span>
             <button class="button" id="open-list-button">Open existing list</button>
@@ -117,7 +117,7 @@ if (isset($_GET["i"])) {
     </div>
 
     <script src="/assets/js/all.js"></script>
-    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/index.js"></script>
 </body>
 
 </html>

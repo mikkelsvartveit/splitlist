@@ -1,44 +1,31 @@
 function loadTheme() {
-    // Temporarily disable CSS transitions
+    // Temporarily disable CSS transitions for 200ms
     document.body.classList.add("no-transition");
+    setTimeout(() => document.body.classList.remove("no-transition"), 200);
 
-    var img = document.querySelectorAll("img");
+    const imgs = document.querySelectorAll("img");
 
-    if (localStorage.getItem("theme") == "dark") {
-        for (var i = 0; i < img.length; i++) {
-            var src = img[i].getAttribute("src");
-            var newSrc = src.replace("/light-mode/", "/dark-mode/");
-            img[i].setAttribute("src", newSrc);
-        }
+    if (localStorage.getItem("theme") === "dark") {
+        // Set all icons to dark mode versions
+        imgs.forEach(img => img.src = img.src.replace("/light-mode/", "/dark-mode/"));
 
         document.documentElement.setAttribute("data-theme", "dark");
         document.querySelector("meta[name='theme-color']").setAttribute("content", "#2e3233");
     }
 
     else {
-        for (var i = 0; i < img.length; i++) {
-            var src = img[i].getAttribute("src");
-            var newSrc = src.replace("/dark-mode/", "/light-mode/");
-            img[i].setAttribute("src", newSrc);
-        }
+        // Set all icons to light mode versions
+        imgs.forEach(img => img.src = img.src.replace("/dark-mode/", "/light-mode/"));
 
-        document.documentElement.removeAttribute("data-theme");
+        document.documentElement.setAttribute("data-theme", "light");
         document.querySelector("meta[name='theme-color']").setAttribute("content", "#ffffff");
     }
-
-    // Re-enable CSS transitions
-    setTimeout(function () {
-        document.body.classList.remove("no-transition");
-    }, 200);
 }
 
-// Toggle dark mode on/off
 function toggleDarkMode() {
-    if (localStorage.getItem("theme") == "dark") {
+    if (localStorage.getItem("theme") === "dark") {
         localStorage.setItem("theme", "light");
-    }
-
-    else {
+    } else {
         localStorage.setItem("theme", "dark");
     }
 
@@ -49,11 +36,22 @@ function toggleDarkMode() {
 function showModal(modalId, show) {
     if (show) {
         document.getElementById(modalId).classList.remove("modal-hidden");
-    }
-
-    else {
+    } else {
         document.getElementById(modalId).classList.add("modal-hidden");
     }
+}
+
+let wait;
+function showSnackbar(snackbarId) {
+    // Clears interval if a snackbar is already displayed
+    if (wait) {
+        clearInterval(wait);
+    }
+
+    // Shows snackbar for 5 seconds
+    const el = document.getElementById(snackbarId);
+    el.classList.add("snackbar-show");
+    wait = setTimeout(() => el.classList.remove("snackbar-show"), 5000);
 }
 
 function newList() {
@@ -61,7 +59,7 @@ function newList() {
 }
 
 function openList() {
-    var id = document.getElementById("open-list-modal-input").value.toLowerCase();
+    const id = document.getElementById("open-list-modal-input").value.toLowerCase();
 
     if (id) {
         window.location = "/list/?id=" + id;
@@ -73,28 +71,27 @@ loadTheme();
 
 // Disables CSS hover effects on touch devices
 function watchForHover() {
-    var hasHoverClass = false;
-    var lastTouchTime = 0;
+    let hasHoverClass = false;
+    let lastTouchTime = 0;
 
-    function enableHover() {
-
+    const enableHover = () => {
         // Discard emulated mouseMove events coming from touch events
         if (!hasHoverClass && new Date() - lastTouchTime >= 500) {
             document.body.classList.add("no-touch");
             hasHoverClass = true;
         }
-    }
+    };
 
-    function disableHover() {
+    const disableHover = () => {
         if (hasHoverClass) {
             document.body.classList.remove("no-touch");
             hasHoverClass = false;
         }
-    }
+    };
 
-    function updateLastTouchTime() {
+    const updateLastTouchTime = () => {
         lastTouchTime = new Date();
-    }
+    };
 
     document.addEventListener('touchstart', updateLastTouchTime, true);
     document.addEventListener('touchstart', disableHover, true);
@@ -102,7 +99,6 @@ function watchForHover() {
 
     enableHover();
 }
-
 watchForHover();
 
 
@@ -115,42 +111,30 @@ document.getElementById("nav-new-list-button").addEventListener("click", newList
 document.getElementById("nav-open-list-button").addEventListener("click", function () {
     showModal("open-list-modal", true);
     document.getElementById("open-list-modal").classList.remove("modal-hidden");
-}
-
-);
+});
 
 document.getElementById("open-list-modal-open-button").addEventListener("click", openList);
 
 document.getElementById("open-list-modal-input").addEventListener("keypress", function (e) {
-
     // Runs function if enter is pressed
-    if (e.keyCode == 13) {
+    if (e.keyCode === 13) {
         openList();
     }
-}
-
-);
+});
 
 // Code for closing any modal
-var modals = document.getElementsByClassName("modal");
-
-for (var i = 0; i < modals.length; i++) {
-
+const modals = document.getElementsByClassName("modal");
+for (const modal of modals) {
     // Close when clicking outside modal
-    modals[i].addEventListener("click", function () {
+    modal.addEventListener("click", function () {
         if (event.target.classList.contains("modal")) {
             showModal(this.id, false);
         }
-    }
-
-    );
+    });
 
     // Close when clicking button
-    var closeButton = modals[i].getElementsByClassName("close-modal")[0];
-
+    const closeButton = modal.querySelector(".close-modal");
     closeButton.addEventListener("click", function () {
         showModal(this.parentElement.parentElement.parentElement.parentElement.id, false);
-    }
-
-    );
+    });
 }

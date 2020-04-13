@@ -24,3 +24,4 @@ if ($conn->error) {
         echo false;
     }
 }
+?>

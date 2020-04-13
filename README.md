@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `list` (
 ENGINE = InnoDB;
 ```
 
-### 3. Set up database config file
+### 3. Set up MySQL config file
 
 Create a new directory called `private` in the **parent directory** of the web root. Copy the file `config/db_config.ini` to the `private` directory you just created. Open the file with a text editor and input your MySQL credentials there. 
 
