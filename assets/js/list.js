@@ -250,7 +250,7 @@ function pullList() {
         ajaxGetList(listId, list.lastedited, function (responseText) {
             pendingAjaxGetRequest = false;
 
-            if (responseText) {
+            if (pendingAjaxSetRequests === 0 && responseText) {
                 list = JSON.parse(responseText);
                 refreshDom();
             }
