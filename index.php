@@ -69,6 +69,8 @@ if (isset($_GET["i"])) {
 
         <div class="divider"></div>
 
+        <img id="front-image" src="/assets/img/light-mode/list.png" alt="Splitlist on laptop and phone">
+
         <div class="row-3">
             <div>
                 <img src="/assets/img/create.svg" alt="Create">

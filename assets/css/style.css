@@ -73,7 +73,7 @@ h1 {
     font-weight: 300;
     text-align: center;
     letter-spacing: 1px;
-    margin-bottom: 20px;
+    margin: 35px 10px 20px 10px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -317,6 +317,13 @@ nav #dark-mode-button {
 
 /* FRONT PAGE */
 
+#front-image {
+    display: block;
+    width: 100%;
+    max-width: 900px;
+    margin: 60px auto;
+}
+
 .divider {
     width: 99%;
     height: 0;
@@ -348,20 +355,29 @@ p.feature {
     margin: 0px auto 50px auto;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 992px) {
     .row-3 {
-        flex-direction: column;
         padding: 0 10px;
     }
 
     .row-3>* {
-        width: 100%;
-        margin-bottom: 30px;
+        width: calc(50% - 25px);
+        margin-bottom: 50px;
     }
 
     .row-3 img {
         width: 128px;
         margin-bottom: 30px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .row-3 {
+        padding: 0 10px;
+    }
+
+    .row-3>* {
+        width: 100%;
     }
 }
 

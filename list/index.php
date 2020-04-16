@@ -1,8 +1,32 @@
+<?php
+$db_config = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . "/../private/db_config.ini");
+
+$conn = new mysqli($db_config["servername"], $db_config["username"], $db_config["password"], $db_config["dbname"]);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$conn->set_charset('utf8');
+
+$idlist = $_GET["id"];
+$listname = "List not found";
+
+$sql = "SELECT * FROM list WHERE idlist = '$idlist'";
+$result = $conn->query($sql);
+
+if (!$conn->error && mysqli_num_rows($result) > 0) {
+    if (mysqli_num_rows($result) > 0) {
+        $listname = mysqli_fetch_assoc($result)["name"];
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Splitlist - The quick way to share lists for anything</title>
+    <title><?php echo $listname; ?> - Splitlist</title>
 
     <meta charset="UTF-8">
     <meta name="description" content="Create, share and collaborate on to-do lists, shopping lists and more. No registration required!">
