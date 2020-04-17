@@ -3,6 +3,12 @@ $db_config = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . "/../private/db_config.i
 
 $conn = new mysqli($db_config["servername"], $db_config["username"], $db_config["password"], $db_config["dbname"]);
 
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$conn->set_charset('utf8mb4');
+
 // Function for generating a random ID
 function generateId() {
     $characters = "abcdefghijklmnopqrstuvwxyz0123456789";

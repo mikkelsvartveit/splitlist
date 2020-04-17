@@ -25,7 +25,9 @@ If you want to check out the code for yourself, follow these instructions:
 
 ### 1. Clone the repository: 
 
-Clone the repository by running this command in the web root directory of your web server:
+Clone the repository to the **web root directory** of your web server. This folder is often called `htdocs` or `www`.
+
+You can do this by running this command in your web root directory:
 
 ```
 git clone https://github.com/mikkelsvartveit/splitlist.git .
@@ -33,19 +35,7 @@ git clone https://github.com/mikkelsvartveit/splitlist.git .
 
 ### 2. Set up SQL database
 
-Create a new database and run the SQL script located at `config/splitlist.sql` on your web server.
-
-```sql
--- splitlist.sql
-
-CREATE TABLE IF NOT EXISTS `list` (
-  `idlist` VARCHAR(6) NOT NULL,
-  `name` VARCHAR(45) NOT NULL,
-  `lastedited` DATETIME(6) NOT NULL,
-  `data` MEDIUMTEXT NULL,
-  PRIMARY KEY (`idlist`))
-ENGINE = InnoDB;
-```
+Create a new database with `utf8mb4_unicode_ci` collation (or use an existing one) and run the SQL script located at config/splitlist.sql on the database. 
 
 ### 3. Set up MySQL config file
 
@@ -65,7 +55,7 @@ To give you an idea, my `db_config.ini` file looks like this:
 servername=localhost
 username=root
 password=root
-dbname=localdb
+dbname=splitlist
 ```
 
 ## Resources

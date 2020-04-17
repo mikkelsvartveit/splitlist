@@ -7,7 +7,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$conn->set_charset('utf8');
+$conn->set_charset('utf8mb4');
 
 $idlist = $conn->real_escape_string($_POST["idlist"]);
 $name = $conn->real_escape_string($_POST["name"]);

@@ -4,4 +4,4 @@ CREATE TABLE IF NOT EXISTS `list` (
   `lastedited` DATETIME(6) NOT NULL,
   `data` MEDIUMTEXT NULL,
   PRIMARY KEY (`idlist`))
-ENGINE = InnoDB;
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
