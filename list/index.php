@@ -1,24 +1,36 @@
 <?php
 $db_config = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . "/../private/db_config.ini");
 
-$conn = new mysqli($db_config["servername"], $db_config["username"], $db_config["password"], $db_config["dbname"]);
+$host = $db_config["servername"];
+$dbname = $db_config["dbname"];
+$username = $db_config["username"];
+$password = $db_config["password"];
+$charset = "utf8mb4";
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+$dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
+$options = [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES => false
+];
+
+try {
+    $pdo = new PDO($dsn, $username, $password, $options);
+} catch (\PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
 }
 
-$conn->set_charset('utf8mb4');
-
 $idlist = $_GET["id"];
-$listname = "List not found";
 
-$sql = "SELECT * FROM list WHERE idlist = '$idlist'";
-$result = $conn->query($sql);
+$sql = "SELECT * FROM list WHERE idlist = ?";
+$stmt = $pdo->prepare($sql);
+$stmt->execute([$idlist]);
+$row = $stmt->fetch();
 
-if (!$conn->error && mysqli_num_rows($result) > 0) {
-    if (mysqli_num_rows($result) > 0) {
-        $listname = mysqli_fetch_assoc($result)["name"];
-    }
+if ($row) {
+    $listname = $row["name"];
+} else {
+    $listname = "List not found";
 }
 ?>
 
@@ -26,7 +38,7 @@ if (!$conn->error && mysqli_num_rows($result) > 0) {
 <html lang="en">
 
 <head>
-    <title><?php echo $listname; ?> - Splitlist</title>
+    <title><?php echo htmlspecialchars($listname); ?> - Splitlist</title>
 
     <meta charset="UTF-8">
     <meta name="description" content="Create, share and collaborate on to-do lists, shopping lists and more. No registration required!">

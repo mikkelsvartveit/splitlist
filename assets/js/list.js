@@ -49,9 +49,9 @@ function ajaxGetList(id, lastedited, callback) {
 function refreshDom() {
     // Checks if list name has changed
     const listNameEl = document.getElementById("list-name");
-    if (listNameEl.innerHTML !== list.name) {
+    if (listNameEl.textContent !== list.name) {
         document.title = list.name + " - Splitlist";
-        listNameEl.innerHTML = list.name;
+        listNameEl.textContent = list.name;
         document.getElementById("edit-name-modal-input").value = list.name;
     }
 
@@ -194,8 +194,8 @@ function refreshDom() {
 
     // Updates item counter
     const itemCountEl = document.getElementById("item-count-number");
-    if (itemCountEl.innerHTML !== listEl.children.length && !isDragging) {
-        itemCountEl.innerHTML = listEl.children.length;
+    if (itemCountEl.textContent !== listEl.children.length && !isDragging) {
+        itemCountEl.textContent = listEl.children.length;
     }
 
     // Updates the localstorage entry that stores previously opened lists
@@ -220,11 +220,11 @@ function loadList() {
         pendingAjaxGetRequest = false;
 
         try {
-            if (responseText !== "null") {
+            if (responseText !== "false") {
                 list = JSON.parse(responseText);
 
                 const listIdEl = document.getElementById("list-id-id");
-                listIdEl.innerHTML = listId.toUpperCase();
+                listIdEl.textContent = listId.toUpperCase();
 
                 refreshDom();
 
@@ -233,7 +233,7 @@ function loadList() {
             } else {
                 clearInterval(autoReload);
 
-                document.getElementById("no-list-id").innerHTML = listId.toUpperCase();
+                document.getElementById("no-list-id").textContent = listId.toUpperCase();
                 document.getElementById("loading").classList.add("hidden");
                 document.getElementById("no-list-error").classList.remove("hidden");
             }
@@ -361,7 +361,7 @@ function shareList() {
     const url = window.location.hostname + "/?i=" + listId;
 
     // Copies the variable "url" to clipboard
-    clipboardEl.innerHTML = url;
+    clipboardEl.textContent = url;
     clipboardEl.style.display = "block";
     clipboardEl.select();
     document.execCommand("copy");

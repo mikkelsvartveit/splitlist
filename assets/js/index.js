@@ -57,8 +57,8 @@ function loadRecentLists() {
             listItemEl.setAttribute("data-list-id", list.id);
             listItemEl.querySelector("a").setAttribute("href", "list/?id=" + list.id);
 
-            listItemEl.querySelector(".list-name").innerHTML = list.name;
-            listItemEl.querySelector(".list-last-edited").innerHTML = timeFormat(new Date(list.time));
+            listItemEl.querySelector(".list-name").textContent = list.name;
+            listItemEl.querySelector(".list-last-edited").textContent = timeFormat(new Date(list.time));
 
             listItemEl.querySelector(".remove-button").addEventListener("click", removeRecentList);
 
