@@ -140,6 +140,7 @@ function refreshDom() {
                     if (index < listEl.children.length - 1) {
                         // Move cursor to next item on list
                         const nextItem = listEl.children[index + 1].querySelector(".text");
+                        nextItem.focus();
                         nextItem.select();
                     } else {
                         // Create a new item if the cursor is on the last item in the list
@@ -404,9 +405,25 @@ const autoReload = window.setInterval(pullList, 1000);
 
 // EVENT LISTENERS:
 
-document.getElementById("list-name").addEventListener("click", () => showModal("edit-name-modal", true));
+document.getElementById("list-name").addEventListener("click", function () {
+    showModal("edit-name-modal", true);
 
-document.getElementById("edit-name-button").addEventListener("click", () => showModal("edit-name-modal", true));
+    // Set cursor to input field
+    setTimeout(() => {
+        document.getElementById("edit-name-modal-input").focus();
+        document.getElementById("edit-name-modal-input").select();
+    }, 100);
+});
+
+document.getElementById("edit-name-button").addEventListener("click", function () {
+    showModal("edit-name-modal", true);
+
+    // Set cursor to input field
+    setTimeout(() => {
+        document.getElementById("edit-name-modal-input").focus();
+        document.getElementById("edit-name-modal-input").select();
+    }, 100);
+});
 
 document.getElementById("share-list-button").addEventListener("click", shareList);
 

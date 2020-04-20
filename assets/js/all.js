@@ -110,7 +110,12 @@ document.getElementById("nav-new-list-button").addEventListener("click", newList
 
 document.getElementById("nav-open-list-button").addEventListener("click", function () {
     showModal("open-list-modal", true);
-    document.getElementById("open-list-modal").classList.remove("modal-hidden");
+
+    // Set cursor to input field
+    setTimeout(() => {
+        document.getElementById("open-list-modal-input").focus();
+        document.getElementById("open-list-modal-input").select();
+    }, 100);
 });
 
 document.getElementById("open-list-modal-open-button").addEventListener("click", openList);

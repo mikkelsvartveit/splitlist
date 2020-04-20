@@ -82,4 +82,10 @@ document.getElementById("new-list-button").addEventListener("click", newList);
 
 document.getElementById("open-list-button").addEventListener("click", function () {
     showModal("open-list-modal", true);
+
+    // Set cursor to input field
+    setTimeout(() => {
+        document.getElementById("open-list-modal-input").focus();
+        document.getElementById("open-list-modal-input").select();
+    }, 100);
 });
