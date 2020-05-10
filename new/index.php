@@ -42,7 +42,7 @@ do {
 } while ($row);
 
 $name = "Unnamed list";
-$data = '[{"id":0,"text":"Item 1","index":1,"checked":false}]';
+$data = '[{"id":0,"text":"Item 1","index":0,"checked":false}]';
 
 try {
     $sql = "INSERT INTO list (idlist, name, lastedited, data) VALUES(?, ?, NOW(), ?)";

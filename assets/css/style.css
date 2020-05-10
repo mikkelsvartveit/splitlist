@@ -52,6 +52,14 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: "Inconsolata";
+    src: url("/assets/fonts/Inconsolata-SemiBold.woff2") format("woff2"),
+        url("/assets/fonts/Inconsolata-SemiBold.woff") format("woff");
+    font-weight: 600;
+    font-style: normal;
+}
+
 
 /* ALL PAGES */
 
@@ -486,6 +494,13 @@ h1.list-name {
     color: var(--color-text-secondary);
     text-align: center;
     margin: 0 0 0 0;
+}
+
+#list-id-id {
+    font-family: "Inconsolata", monospace;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 #item-count {
