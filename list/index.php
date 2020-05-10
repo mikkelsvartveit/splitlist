@@ -118,8 +118,8 @@ if ($row) {
     <div id="open-list-modal" class="modal modal-hidden">
         <div class="modal-content">
             <h2>Open list</h2>
-            <p>Input ID to open list:</p>
-            <input type="text" id="open-list-modal-input" placeholder="List ID">
+            <p>Input ID or paste link to open list:</p>
+            <input type="text" id="open-list-modal-input" placeholder="List ID or link">
             <div class="modal-buttons">
                 <div>
                     <button class="button close-modal">Cancel</button>

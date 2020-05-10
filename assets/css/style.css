@@ -54,8 +54,7 @@
 
 @font-face {
     font-family: "Inconsolata";
-    src: url("/assets/fonts/Inconsolata-SemiBold.woff2") format("woff2"),
-        url("/assets/fonts/Inconsolata-SemiBold.woff") format("woff");
+    src: url("/assets/fonts/Inconsolata-SemiBold.woff") format("woff");
     font-weight: 600;
     font-style: normal;
 }

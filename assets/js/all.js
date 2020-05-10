@@ -59,7 +59,8 @@ function newList() {
 }
 
 function openList() {
-    const id = document.getElementById("open-list-modal-input").value.toLowerCase();
+    const input = document.getElementById("open-list-modal-input").value.toLowerCase().split("=");
+    const id = input[input.length - 1];
 
     if (id) {
         window.location = "/list/?id=" + id;
