@@ -4,7 +4,7 @@ Splitlist is the fastest way to create, share and collaborate on to-do lists, sh
 
 Visit website here: [splitlist.mikkelsvartveit.com](https://splitlist.mikkelsvartveit.com)
 
-![Splitlist screen dump](https://imagehost.imageupload.net/2020/04/10/screenshot.png)
+![Splitlist screen dump](https://user-images.githubusercontent.com/30391413/96385267-14195000-1193-11eb-9bac-760c84b76517.png)
 
 ## What is Splitlist?
 
